@@ -5,23 +5,18 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from "react-router-dom"
 import {BsFacebook}  from "react-icons/bs"
-import {BiLogIn}  from "react-icons/bi"
-import {AiTwotoneMail}  from "react-icons/ai"
-import {MdOutlineMail}  from "react-icons/md"
-import {GiRotaryPhone}  from "react-icons/gi"
+
 import {BsLinkedin}  from "react-icons/bs"
-
-
-
 import {AiFillTwitterCircle}  from "react-icons/ai"
 import { NavLink } from 'react-router-dom';
-import imgLogo from "../../assests/ecommerce/b3.jpg"
+
+import imgLogo from "./ecommerce/b3.jpg"
+import contactImg from "./ecommerce/b17.jpg"
 
 
 
 
 
-import contactImg from "../../assests/ecommerce/b17.jpg"
 const serviceID = process.env.REACT_APP_EMAILJS_SERVICE_ID 
 const templateID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID 
 const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY

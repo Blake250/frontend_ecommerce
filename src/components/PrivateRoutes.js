@@ -1,6 +1,6 @@
 import React from 'react'
 import useAuth from './useAuth'
-import Login from '../../pages/auth/Login'
+import Login from './Login'
 import { Outlet } from 'react-router-dom'
 
 

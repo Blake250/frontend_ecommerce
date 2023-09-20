@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Home, Contact, Login, Register, Reset, OrderPage } from './pages';
+import { Home, Contact, Login, Register, Reset, OrderPage } from './components';
 import { Footer, Header } from './components';
 import styled from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
-import PrivateRoutes from './components/authCheck/PrivateRoutes';
+import PrivateRoutes from './components/PrivateRoutes';
 import { ToastContainer } from 'react-toastify';
-import ErrorPage from './components/errorPage/ErrorPage';
+import ErrorPage from './components/ErrorPage';
 
 const AppContainer = styled.div`
   position: relative;

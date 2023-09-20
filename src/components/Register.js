@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 
 import styled from 'styled-components'
-import  registerImg from "../../assests/ecommerce/register.png"
+import  registerImg from "./ecommerce/register.png"
 import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Loader from '../../load/Loader';
+import Loader from './Loader';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/firebase';
+import { auth } from './firebase';
 import { useNavigate } from 'react-router-dom';
 
 

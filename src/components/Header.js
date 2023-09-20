@@ -1,6 +1,4 @@
 
-
-
 import React, {useState,useEffect} from 'react'
 import styled from "styled-components"
 import { Link,NavLink } from 'react-router-dom'
@@ -9,7 +7,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import  {MdOutlineMenuOpen} from "react-icons/md"
 import  {AiOutlineClose} from "react-icons/ai"
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+//import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import  {FaUserCircle} from "react-icons/fa"
@@ -17,7 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { toast, } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeActiveUser, setActiveUser } from '../redux/slice/authSlice';
-
+import { auth } from './firebase';
 
 
 

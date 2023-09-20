@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 
 import styled from 'styled-components'
-import  loginImg from "../../assests/ecommerce/login.png"
+import  loginImg from "./ecommerce/login.png"
 import { Link, NavLink } from 'react-router-dom'
 import {FaGoogle} from "react-icons/fa";
-import { auth, provider } from '../../firebase/firebase';
+import { auth, provider } from './firebase';
 import {  signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Loader from '../../load/Loader';
+import Loader from './Loader';
 import 'react-toastify/dist/ReactToastify.css';
 
 

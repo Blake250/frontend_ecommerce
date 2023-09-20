@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
 
 import styled from 'styled-components'
-import  resetImg from "../../assests/ecommerce/forgot.png"
+import  resetImg from "./ecommerce/forgot.png"
 import { Link } from 'react-router-dom'
 import { sendPasswordResetEmail, } from 'firebase/auth'
-import { auth } from '../../firebase/firebase'
+import { auth } from './firebase'
 import { toast } from 'react-toastify'
-import Loader from '../../load/Loader'
+import Loader from './Loader'
 
 
 

@@ -6,10 +6,10 @@ import {BsLinkedin}  from "react-icons/bs"
 import {AiFillTwitterCircle}  from "react-icons/ai"
 import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import contactImg from "../../assests/ecommerce/b17.jpg"
+import contactImg from "./ecommerce/b17.jpg"
 import {useNavigate} from "react-router-dom"
-import imgLogo from "../../assests/ecommerce/b3.jpg"
-
+//import imgLogo from "../../assests/ecommerce/b3.jpg"
+import imgLogo from "./ecommerce/b3.jpg"
 
 
 

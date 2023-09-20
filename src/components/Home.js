@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Slider from "../../slide/Slider"
+import Slider from "./Slider"
 
 const Home = () => {
   return (

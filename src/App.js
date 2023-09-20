@@ -1,25 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Home, Contact, Login, Register, Reset, OrderPage } from './pages';
+import { Footer, Header } from './components';
+import styled from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoutes from './components/authCheck/PrivateRoutes';
+import { ToastContainer } from 'react-toastify';
+import ErrorPage from './components/errorPage/ErrorPage';
+
+const AppContainer = styled.div`
+  position: relative;
+`;
+
+const HeaderContainer = styled.div`
+  position: sticky;
+  width: 100%;
+  z-index: 2;
+`;
+
+const FooterContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+`;
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AppContainer>
+        <HeaderContainer>
+          <ToastContainer />
+          <Header />
+        </HeaderContainer>
+        <MainContent>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/"  element={<Login/>} />
+            <Route path="/register"  element={<Register />} />
+            <Route path="/reset"  element={<Reset />} />
+
+             {/* Private Routes */}
+            <Route element={<PrivateRoutes />}>
+           
+
+              <Route path="/home" element={<Home />} />
+              <Route path="/order" element={<OrderPage />} />
+              <Route path="/contact" element={<Contact />} />
+              
+            </Route>
+    
+            {/* Catch-all Route */}
+            <Route path="/*" element={<ErrorPage />} />
+          </Routes>
+        </MainContent>
+        <FooterContainer>
+          <Footer />
+        </FooterContainer>
+      </AppContainer>
+    </Router>
   );
 }
 
 export default App;
+
+const MainContent = styled.div`
+  padding-top: 80px;
+  position: relative;
+`;

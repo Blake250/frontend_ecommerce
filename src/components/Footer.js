@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { StyledComponent } from 'styled-components'
+import styled from 'styled-components'
 
 const currentDate = new Date()
 const year = currentDate.getFullYear()
@@ -20,6 +20,7 @@ const Container = styled.div`
 background-color:#a46852;
 height:80px;
 
+
 display:flex;
 align-items:center;
 justify-content:center;
@@ -30,7 +31,7 @@ const BottomPage = styled.div`
 
 div{
   text-align:center;
-  font-size:bold;
+  font-size:16px;
   font-weight:600;
   margin-left:50px;
 
@@ -38,7 +39,7 @@ div{
 
   @media (max-width: 768px) {
     text-align:center !important;
-  font-size:bold;
+  font-size:15px;
   font-weight:600;
     
   }

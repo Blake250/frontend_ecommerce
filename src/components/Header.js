@@ -1,21 +1,25 @@
 
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useRef} from 'react'
 import styled from "styled-components"
 import { Link,NavLink } from 'react-router-dom'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 //import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import  {MdOutlineMenuOpen} from "react-icons/md"
 import  {AiOutlineClose} from "react-icons/ai"
-import { signOut } from 'firebase/auth';
-//import { auth } from '../firebase/firebase';
+
+import { shortenText } from './utils';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import  {FaUserCircle} from "react-icons/fa"
-import { onAuthStateChanged } from 'firebase/auth';
+import { logOut, RESET_AUTH } from '../redux/slice/authSlice';
 import { toast, } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeActiveUser, setActiveUser } from '../redux/slice/authSlice';
-import { auth } from './firebase';
+import Loader from "./Loader"
+import ShowOnLogin, {ShowOnLogOut} from './hiddenLinks/hideLink';
+import { useLocation } from 'react-router-dom';
+
+
+
 
 
 
@@ -28,27 +32,60 @@ const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+
+ 
  // z-index: 4 !important;
+
 `;
+
+
+
 
 const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-`;
+  align-items: center !important;
+ width:100%;
+ height:80px !important;
+ // padding: 25px 0px;
+  //padding-bottom:16px;
+  position:relative;
+
+  &.no-scroll{
+    width: 100%;
+  position: fixed;
+  top: 0;
+  transition: all 0.5s;
+ // z-index: 9;
+  };
+
+  &.fixed {
+    width: 100%;
+    height: ${({ scrollPage }) => (scrollPage ? '250px' : 'auto')};
+    overflow: hidden;
+    transition: all 0.1s
+  };
+  `
+
+
 
 const LogoLink = styled(Link)`
   color: white;
   font-size: 22px !important;
   font-weight: 600;
   text-decoration: none;
+  animation: slide-up 0.5s ease;
+  
+  padding-left:12px;
+  span{
 
-  span {
+ 
+  text-align:center;
     color: red;
     font-size: 20px;
-  }
-`;
+ 
+}
+`
 
 const NavLinksContainer = styled.div`
   display: flex;
@@ -59,19 +96,23 @@ const NavLinksContainer = styled.div`
   color:white;
   align-items:center;
   justify-content:center;
+  margin-left:12px;
   &>span{
+  
    &:last-child{
     font-size:13px;
     font-weight:600;
     padding-left:3px;
+  cursor:pointer;
 
    }
-  }
- }
+  };
+ };
+
  @media (max-width: 760px) {
   display:none;
   
- }
+ };
 `;
 
 const NavLinkStyled = styled(NavLink)`
@@ -82,6 +123,8 @@ const NavLinkStyled = styled(NavLink)`
   font-weight: bold;
   position: relative;
   margin: 0 4px;
+ // transition: color 0.5s linear;
+  transition: all 0.2s ease-in-out;
   svg{
     white-space:wrap !important;
   }
@@ -93,8 +136,9 @@ const NavLinkStyled = styled(NavLink)`
 
 
   &:hover {
-    color: #ddd3cf;
-  }
+    color: #009900;
+    transform:translateY(-0.5rem)
+  };
 
   &.active
    span:after {
@@ -107,13 +151,14 @@ const NavLinkStyled = styled(NavLink)`
     height: 2px;
     background-color: white;
     position: absolute;
-    left: 0;
+    left: 0px;
     right: 0;
-    bottom: -4px;
+    bottom: -1px;
     transform: scaleX(0);
     transform-origin: left right;
     opacity: 0;
     transition: transform 0.2s ease-in-out;
+    width:100%;
   };
 
 `;
@@ -126,16 +171,22 @@ const MenuToggleButton = styled.span`
   cursor: pointer;
   position: relative;
   z-index:9;
+  svg{
+  //  padding-top:9px;
+   //padding-right:15px;
+   margin:0px 30px -6px 10px
+  }
 
   @media (max-width: 768px) {
     display: block;
-  }
-`;
+  };
+`
 
 const MenuExternalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center !important;
+  justify-content:flex-start;
   background-color: black;
   border-radius:10px;
   position: fixed;
@@ -148,7 +199,7 @@ const MenuExternalContainer = styled.div`
   @media (min-width:760px) {
     display:none;
     
-  }
+  };
 
   div {
     display: flex;
@@ -170,14 +221,12 @@ const MenuExternalContainer = styled.div`
 const CenterItems = styled.div`
 position: relative;
 
+
 div{
  margin-right:250px !important;
  position: absolute;
  white-space:nowrap;
- left:-21em;
-  
-
-
+ left:-24em;
 
 
 }
@@ -197,24 +246,96 @@ svg {
   }
 `
 
+const IconName = styled(FaUserCircle)`
+padding-right:3px;
+padding-top:5px;
+
+`
+
+const LogoLinked = styled(Link)`
+ text-decoration:none !important;
+ transition: all 0.2s ease-in-out;
+ &:hover {
+    color: #009900;
+    transform:translateY(-0.5rem)
+  };
+
+`
+const GeneralContainer = styled.div`
+display:flex !important;
+align-items:center;
+align-items:center;
+
+`
 
 
 
-
-
-
-
-const Header = () => {
+ const Header = () => {
   const [cshowMenu, setShowMenu] = useState(false);
   const [userName, setUserName] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [scrollPage, setScrollPage] = useState(false)
+ // const [ProfilePhoto, setProfilePhoto] = useState(false)
+  const scrollRef = useRef(0);
+  const [showLoader, setShowLoader] = useState(false)
+  const {user, isLoggedIn, isLoading} = useSelector((state)=> state?.auth) || {}
+  //console.log(`your login is ${isLoggedIn}, ${user?.name}`)
+ const location = useLocation()
 
 
-  const isLoggedIn = useSelector((state)=> state.auth.auth?.isLoggedIn)
-  console.log(`your login is ${isLoggedIn}`)
+  const userData = user?.name || "..."
+
+
+
   
+
+
+ 
+
+   /*const logOutUser = async () => {
+      setShowLoader(true); // Show loader when logout is initiated
+      await dispatch(logOut());
+      await dispatch(RESET_AUTH());
+      navigate("/");
+     
+        setShowLoader(false); // Hide loader after delay
   
+    };*/
+
+
+
+
+
+
+
+  
+
+
+/*const handleScroll = () => {
+  const scrollPosition = window.scrollY;
+
+  if (scrollPosition > 250) {
+    // If scroll position is greater than 50, set scrollPage to false
+    setScrollPage(false);
+    window.scrollTo(0, 250); // Prevent scrolling further down
+  } else {
+    // If scroll position is 250 or less, set scrollPage to true
+    setScrollPage(true);
+  }
+};
+
+useEffect(() => {
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);*/
+
+
+
+
 
   const toggleMenu = () => {
     setShowMenu(!cshowMenu);
@@ -223,86 +344,33 @@ const Header = () => {
   const closeMenu = () => {
     setShowMenu(false);
   };
+ 
 
-  /*const logOutBtn = (()=>{
-    signOut(auth).then(()=>{
-    
-      setTimeout(()=>{
-        toast.success("logout is successful")
-      //  navigate("/")
-
-      },5000)
-     
-   
-
-    }).catch((error)=>{
-      toast.error(error.message)
-
-    })
-
-  })*/
-
-
-  const logOutBtn = () => {
-    signOut(auth)
-      .then(() => {
-        navigate("/")
-          toast.success("logout is successful");
-       
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
-  
 
   
-/*  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/");
-    }
-  }, [isLoggedIn, navigate]);*/
-
-
-
-  useEffect(()=>{
-    onAuthStateChanged(auth, ((user)=>{
-
-      if(user){
-       // console.log(user)
      
-       
-        if(user.displayName == null){
-        const Name = user.email.substring(0, user.email.indexOf("@"))
-        
-        const getName = Name.charAt(0).toUpperCase() + Name.slice(1)
-      
-       console.log(setUserName(getName))
-        }
-        else{
-          
-        setUserName(user.displayName)
+ // const navigate = useNavigate()
+  //const dispatch = useDispatch()
 
-        }
-       
+const logOutUser = (async()=>{
 
-        dispatch(setActiveUser({
-          email:user.email,
-          usedName:user.displayName ? user.displayName : userName,
-          userID: user.uid
+ 
+ await dispatch(logOut())
 
-        }))
-     
-      }
-      else{
-        setUserName("")
-        dispatch(removeActiveUser())
-     
-      }
-    
-    
-    }))
-  }, [dispatch, userName])
+ await dispatch(RESET_AUTH()) 
+
+    navigate("/") 
+
+ 
+})
+
+
+
+
+
+
+
+
 
 
 
@@ -312,7 +380,7 @@ const Header = () => {
     <CartLink to="/cart">
 
    
-       <ShoppingCartOutlinedIcon fontSize='8px' />0
+       <ShoppingCartOutlinedIcon fontSize='8px' />
        
        </CartLink>
 
@@ -320,81 +388,102 @@ const Header = () => {
 )
 
 
+
   return (
     <HeaderContainer>
-      <HeaderContent>
-        <LogoLink to="/home" className="btn">
-          e<span>SHOP.</span>
+      { isLoading &&   <Loader/>}
+      <HeaderContent className={scrollPage ? "fixed" : "" }  >
+      {  isLoggedIn ?
+       (
+        
+        <LogoLink to={"/home"}  className="btn">
+          <span>E-SHOP!</span>
         </LogoLink>
 
+       )   : 
+        (
+          <LogoLink >
+            e<span>SHOP.</span>
+          </LogoLink>
+  )
 
+      }
         <NavLinksContainer>
+
 
           
         <CenterItems>   
-          {
-            isLoggedIn ? (
+       
               <>  
           <div>  
+            <ShowOnLogin> 
           <NavLinkStyled   to="/home" onClick={closeMenu}>
 
               <span>Home</span>
           </NavLinkStyled>
-         
-          <NavLinkStyled  to="/contact" onClick={closeMenu}>
+          </ShowOnLogin>
+          <ShowOnLogin> 
+          <NavLinkStyled  to="/admin/home" onClick={closeMenu}>
            
-              <span   >contact us</span>
+           <span   >Admin</span>
           </NavLinkStyled>
+          </ShowOnLogin>
           </div>
           </>
-            ) :
-            (
+          
 
-            " "
-            )
-}
           </CenterItems>
 
         
 
        
-        { !isLoggedIn   ? 
-
-         (  <>  
-       <NavLinkStyled to="/" onClick={closeMenu}>
+         <>  
+       <ShowOnLogOut> 
+       <NavLinkStyled to="/home" onClick={closeMenu}>
         
         <span>Login</span>
            
       </NavLinkStyled>
+      </ShowOnLogOut>
 
-          
-      <NavLinkStyled to="/cart" onClick={closeMenu}>
-            <span>cart</span>
-          </NavLinkStyled>
-        
-           {cart}  
-          </>
-           ) :
-
-          (  
-            <>
-               
-          <div style={{color:"#ff7722"}}>     
+              
+               <ShowOnLogin> 
+         
+       
+              <GeneralContainer>  
+               <div  style={{color:"#ff7722", textDecoration:"none" }}>     
+           <IconName> 
          <span>   
-          <FaUserCircle size={16} /> </span>
-           <span>
-           Hi, {userName} </span>
+        
+          <FaUserCircle size={16}  />
+          
+           </span>
+           </IconName>
+          <LogoLinked  to={"/profile"} > 
+           <span    style={{fontSize:"13px",color:"#ff7722",}} >
+           
+           Hi,{shortenText(userData, 9)} 
+       
+           </span>
+           </LogoLinked>
+       
+         
             </div>
+            </GeneralContainer>
+        
+            </ShowOnLogin>
+            <ShowOnLogin> 
             <NavLinkStyled to="/order" onClick={closeMenu}>
             <span>Orders</span>
           </NavLinkStyled>
-
-
-              <NavLinkStyled to="/" onClick={logOutBtn}>
+          </ShowOnLogin>
+          <ShowOnLogin> 
+ 
+              <NavLinkStyled  to="/" onClick={logOutUser}>
             <span>LogOut</span>
-          </NavLinkStyled>
-
-        
+          </NavLinkStyled> 
+ 
+          </ShowOnLogin>
             <NavLinkStyled to="/cart" onClick={closeMenu}>
             <span>cart</span>
           </NavLinkStyled>
@@ -402,52 +491,81 @@ const Header = () => {
           {cart}
     
           </>
-          )
-
-        }
+   
         
          
         
       
         
         </NavLinksContainer>
-        <MenuToggleButton onClick={toggleMenu}>
+           <MenuToggleButton onClick={toggleMenu}>
           {cshowMenu ? <AiOutlineClose /> : <MdOutlineMenuOpen />}
         </MenuToggleButton>
       </HeaderContent>
+    
       <MenuExternalContainer showMenu={cshowMenu} onClick={toggleMenu}>
         <div>
+          <ShowOnLogin> 
           <LogoLink to="/home" className="btn">
             e<span>SHOP.</span>
           </LogoLink>
+
+          <NavLinkStyled to="/contact" onClick={closeMenu}>
+            <span>Contact </span>
+          </NavLinkStyled>
           <NavLinkStyled to="/home" onClick={closeMenu}>
             <span>Home</span>
           </NavLinkStyled>
-          <NavLinkStyled to="/contact" onClick={closeMenu}>
-            <span>Contact us</span>
-          </NavLinkStyled>
+         
           <NavLinkStyled to="/order" onClick={closeMenu}>
             <span>Orders</span>
           </NavLinkStyled>
+          </ShowOnLogin>
+          
+          <ShowOnLogOut>
           <NavLinkStyled to="/register" onClick={closeMenu}>
             <span>Register</span>
           </NavLinkStyled>
-        
-          <NavLinkStyled to="/" onClick={closeMenu}>
+          
+          </ShowOnLogOut>
+            <ShowOnLogOut> 
+          <NavLinkStyled to="/home" onClick={closeMenu}>
             <span>Login</span>
           </NavLinkStyled>
-         
-        
-          <NavLinkStyled to="/" onClick={logOutBtn}>
+          </ShowOnLogOut>
+          <ShowOnLogin>  
+          <NavLinkStyled to="/" onClick={logOutUser}>
             <span>LogOut</span>
           </NavLinkStyled>
+          </ShowOnLogin>
         </div>
       </MenuExternalContainer>
+    
     </HeaderContainer>
   );
 };
 
-export default Header;
+
+export const UserName = (()=>{
+  const {user} = useSelector((state)=> state.auth)
+
+const userData = user?.name || "..."
+return(
+
+  <span  style={{
+        color: "#ff7722",
+         fontSize:"13px",
+        
+       
+        
+        }} >Hi,  {shortenText(userData, 9)}  </span>
+)
+
+
+})
+
+
+export default Header
 
 
 
@@ -477,6 +595,19 @@ export default Header;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 

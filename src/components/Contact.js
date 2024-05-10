@@ -1,4 +1,39 @@
-import React, { useState,useRef } from 'react';
+import React from 'react'
+import styled from 'styled-components'
+
+function Contact() {
+  return (
+    <Container>
+       <Contain>
+
+</Contain>
+
+      </Container>
+  )
+}
+
+export default Contact
+
+
+const Container = styled.div`
+
+`
+
+const Contain = styled.div`
+
+`
+
+
+
+
+
+
+
+
+
+
+
+/*import React, { useState,useRef } from 'react';
 import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
 import { ToastContainer,toast } from 'react-toastify';
@@ -277,21 +312,7 @@ const LogoPhoto = styled.div`
 
 `
 
-/*const TextPages= styled.textarea`
-transition:background-color 0.9 ease;
-  
-width:270px;
-height:25vh;
-outline:none;
-    margin-bottom:3px;
-    background-color:whitesmoke;
-    border:none;
-    border-radius:3px;
-   &:hover{
-    background-color:white;
-    transform:scale(1);
-   }
-`*/
+
 
 
 
@@ -593,18 +614,9 @@ z-index:-10;
 
 
 
-
-
-
-
-
-
-
-
-
   
 
-`
+`*/
 
 
 

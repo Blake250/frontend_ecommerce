@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { sliderData } from './slideData'
 import SlideComponent from './SlideComponent'
+import HomeInfo from './homeBox/HomeInfo'
 
 
 
@@ -20,8 +21,16 @@ const Slider = () => {
               
            <SlideItems>
             <SlideComponent/>
+           
            </SlideItems>
-     
+           <Info> 
+           <HomeInfo/>
+           <LatestItem>
+          
+          </LatestItem>
+       
+           </Info>
+       
       </Contain>
       </Container>
   )
@@ -32,7 +41,8 @@ export default Slider
 
 
 const Container = styled.div`
-width:100%;
+width:100% !important;
+overflow-x:hidden;
 //width:80%;
 max-width:1280px;
 margin:0 auto;
@@ -42,10 +52,18 @@ margin:0 auto;
 }
 
 `
+const LatestItem = styled.div`
+//margin-top:-90px
+//padding-bottom:80px;
 
+`
 const SlideItems = styled.div`
   
 
+`
+const Info = styled.div`
+margin-bottom:60px;
+//padding-top:-120px;
 `
 
 

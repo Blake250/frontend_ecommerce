@@ -1,42 +1,96 @@
 import React from 'react'
 import styled from 'styled-components'
 import ReactDOM from "react-dom"
-//import  loadingImg from "../../assests/ecommerce/loader.gif"
-import loadingImg from "../loading/loader.gif"
+import { useSelector } from 'react-redux'
+import LoadingImg from "./loading/loader.gif"
 
+
+
+
+
+
+const Contain = styled.div`
+  background-color: rgba(0, 0, 0, 0.7);
+ // background: linear-gradient(rgba(185, 170, 170, 0.1), rgba(177, 183, 188, 0.8));
+  z-index: 9;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+`;
+
+const LoadImage = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+ // background: linear-gradient(rgba(185, 170, 170, 0.1), rgba(177, 183, 188, 0.8));
+  z-index: 999;
+`;
 
 function Loader() {
-  return ReactDOM.createPortal (
-    <Container>
-        <LoaderImg>
-     <img src={loadingImg} alt="Loading..." />
+  const {isLoading} = useSelector((state) => state.auth);
 
-        </LoaderImg>
-    </Container>,
-    document.getElementById("loader")
-  )
+  return (
+    <div>
+      
+        <Contain>
+        {isLoading && (
+          <LoadImage>
+            <img src={LoadingImg} alt="Loading..." />
+          </LoadImage>
+          )}
+        </Contain>
+      
+    </div>
+  );
 }
 
-export default Loader
-
-
-const Container = styled.div`
-background-color: rgba(0, 0, 0, 0.7);
-z-index: 9;
-position: fixed;
-width:100%;
-height:100vh;
+export default Loader;
 
 
 
-`
-
-const LoaderImg = styled.div`
-position:fixed;
-left:50%;
-top:50%;
-//transform:translate(-50%, -50%);
-z-index:999;
 
 
-`
+
+
+
+
+/*const Contain = styled.div`
+  background-color: rgba(0, 0, 0, 0.7)!important;
+ 
+  z-index: 9;
+  position: fixed;
+  width: 100% !important;
+  height: 100vh !important;
+`;
+
+const LoadImage = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+ background: linear-gradient(rgba(185, 170, 170, 0.1), rgba(177, 183, 188, 0.8));
+
+  z-index: 999;
+`;
+
+const Loader = () => {
+  return ReactDOM.createPortal(
+    <Contain >
+      <LoadImage> 
+   
+        <img src={LoadingImg} alt="Loading..." />
+      
+      </LoadImage>
+    </Contain>,
+    document.getElementById("loader")
+  );
+};
+
+export const SpinnerImg = () => {
+  return (
+    <Contain >
+      <img src={LoadingImg} alt="Loading..." />
+    </Contain>
+  );
+};
+
+export default Loader;*/

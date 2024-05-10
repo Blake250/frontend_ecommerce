@@ -17,7 +17,24 @@ const Container = styled.div`
   width: 150%;
   position: relative;
  
+  @keyframes slide-up {
+    0% {
+      transform: translateY(-5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-down {
+    0% {
+      transform: translateY(5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 
+ 
   @media (max-width:768px) {
     max-width: 120% !important;
   width: 80% !important;
@@ -50,6 +67,7 @@ const LoginImage = styled.div`
  //padding-bottom:30px;
  margin-bottom:25px;
 margin-left:40px;
+animation: slide-down 0.5s ease;
     
   img {
     width: 550px;
@@ -67,6 +85,7 @@ margin-left:40px;
 `;
 
 const Form = styled.div`
+ animation: slide-up 0.5s ease;
   background-color: #ccc;
   padding: 5px 7px;
   margin-left: -40px;
@@ -269,7 +288,7 @@ const Reset = () => {
           </form>
          
           <CreateOne>
-            <Link to="/">-Login</Link>
+            <Link to="/login">-Login</Link>
          
            
             <Link to="/register">-Register</Link>

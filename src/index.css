@@ -20,9 +20,62 @@ code {
 
 .slick-list, .slick-slider, .slick-track{
 
-  padding: 1.5rem 0;
+  padding: 1.4rem 0;
+
+
 
 }
+
+
+
+.react-multiple-carousel__arrow--right{
+ right:calc(4% + -3px) !important;
+top:30%;
+}
+
+
+
+.react-multiple-carousel__arrow--left{
+  left:calc(4% + -19px) !important;
+ top:29%;
+ }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:768px) {
+  .slick-list, .slick-slider, .slick-track{
+
+    padding: 1rem 0 ;
+  
+  
+  }
+  
+}
+
 
   .center .slick-center .project{
   transform: scale(1.3);

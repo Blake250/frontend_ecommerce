@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import styled from 'styled-components'
 import  loginImg from "./ecommerce/login.png"
@@ -10,7 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from './Loader';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { validateEmail } from './utils';
+import { login } from '../redux/slice/authSlice';
+import {  useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -21,6 +23,24 @@ const Container = styled.div`
   max-width: 300%;
   width: 150%;
   position: relative;
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(-5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-down {
+    0% {
+      transform: translateY(5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
  
 
   @media (max-width:768px) {
@@ -53,8 +73,8 @@ const ContainItem = styled.div`
 const LoginImage = styled.div`
 
  margin-bottom:25px;
-
-    
+ animation: slide-down 0.5s ease;
+  
   img {
     width: 550px;
     //height:500px;
@@ -63,8 +83,8 @@ const LoginImage = styled.div`
     margin-top:20px !important;
     
   img {
-    width: 400px !important;
-    height:400px !important;
+    width: 350px !important;
+    height:350px !important;
   }
   }
 `;
@@ -76,11 +96,12 @@ const Form = styled.div`
   padding-bottom: 35px;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  animation: slide-up 0.5s ease;
   
 
  @media (max-width:768px) {
   padding: 5px 7px !important ;
-  margin-left: -72px !important ;
+  margin-left: -45px !important ;
   padding-bottom: 35px !important ;
   border-radius: 5px !important ;
   
@@ -128,7 +149,7 @@ const Form = styled.div`
   form {
   //  position: relative !important;
   //  z-index: 20 !important;
-
+  animation: slide-up 0.5s ease;
     input {
       width: 350px;
       height: 25px;
@@ -137,6 +158,7 @@ const Form = styled.div`
       border-radius: 3px;
       border: none;
       opacity: 0.5;
+      cursor:pointer;
 
       @media (max-width:768px) {
         width: 200px !important ;
@@ -256,47 +278,54 @@ text-align:center;
 
 `
 
+
+
+
+
+
+
+
+
+
+
+
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  //const [isLoading, setIsLoading] = useState(false)
+  const {isLoading, isLoggedIn, isSuccess }= useSelector((state)=> state?.auth)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-const loginUser = ((e)=>{
+
+
+const loginUser = ( async (e)=>{
   e.preventDefault()
-  setIsLoading(true)
-  console.log(loginUser)
-  signInWithEmailAndPassword(auth, email,password)
-  .then((userCredential)=>{
-    navigate("/home")
-    const user = userCredential.user
-    setIsLoading(false)
-    toast.success("Login is successful...")
+  if(!email  && !password){
+    return toast.error("Please Enter a Valid Email and Password")
 
-
-    
-  }).catch((error)=>{
-    const errorMessage = error.message
+  }
  
-    setIsLoading(false)
-    toast.error(errorMessage)
-  })
+  if(!validateEmail(email)){
+    return toast.error("Please Enter a Valid Email")
+  }
+  
+  
+
+const userData = { email, password, } 
+console.log(userData)
+await dispatch(login(userData))
 
 
 })
 
 
-const loginWithGoogle = (()=>{
-  signInWithPopup(auth, provider)
-  .then((result)=>{
-    navigate("/home")
-    const user = result.user
-    toast.success("login is successful...")
+useEffect(() => {
+  if (isLoggedIn) {
+    navigate("/home");
+  }
+}, [isLoggedIn, navigate]);
 
-  }).catch((error)=>{
-    toast.error(error.message)
-  })
-})
 
 
 
@@ -312,7 +341,7 @@ const loginWithGoogle = (()=>{
         <Form>
           <p>Login</p>
           <form  onSubmit={loginUser} >
-            <input type="text"
+            <input type="email"
              placeholder="Email" 
              value={email}
              onChange={(e)=> setEmail(e.target.value)}
@@ -333,9 +362,7 @@ const loginWithGoogle = (()=>{
               <p>--or--</p>
             </div>
           </form>
-          <GoogleButton onClick={loginWithGoogle} >
-            <FaGoogle />   <span>  Login with Google   </span>
-          </GoogleButton>
+          
           <CreateOne>
      
             <span>Don't have an account?</span>
@@ -373,176 +400,3 @@ export default Login;
 
 
 
-
-
-/*function Login() {
-  return (
-    <Container>
-        <ContainItem>   
-     <LoginImage>
-     <img src={loginImg} alt="" />
-
-     </LoginImage>
-     <Form >
-         <p>Login</p>
-    
-        <form className='forms'>
-        <input type="text" placeholder='Email' required />
-        <input type="password"  placeholder='Password' required/>
-        <button >Login</button>
-        <div>
-          <Link to={"/reset"} > Forgot Password </Link>
-          <p>--or--</p>
-        </div>
-   
-     
-        </form>
-        <GoogleButton> <FaGoogle/> Login with Google</GoogleButton>
-
-     </Form>
-     </ContainItem>
-    </Container>
-     
-  )
-}
-
-export default Login
-
-
-const Container = styled.div`
-max-width:120%;
-width:80%;
-position: relative;
-
-`
-
-const ContainItem = styled.div`
-    width:400px;
-    margin-left:25px;
-    
-display:flex;
-justify-content:center;
-
-align-items:center;
-
-
-
-
-
-    
-`
-const LoginImage = styled.div`
-margin-top:20px;
-
-img{
-  width:400px;
-}
-
-`
-const Form = styled.div`
-
-background-color:#ccc;
-padding: 5px 7px;
-  margin-left: -65px; 
-  padding-bottom:35px;
-  border-radius:5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-  position: relative !important;
-  //z-index:15 !important;
-
-div{
-  a{
-    font-size:12px;
-    font-weight:bold;
-    text-decoration:none;
-    color:black;
-    opacity:0.5;
-  }
-}
-
-//padding-top:40px;
-
-
-p{
-    text-align:center !important;
-    font-size:23px;
-    font-weight:600;
-    color:#e28743;
-    opacity:1 !important;
-    line-height:0;
-    &:last-child{
-      font-weight:bold;
-  text-align:center !important;
-  font-size:12px !important;
-  color:black !important;
-  opacity:0.5  !important;
-    }
-   
-   
-  }
-   
-form{
-  
-position: relative;
-//z-index:20;
- 
-  
-
- input{
-  width:200px;
-  height:20px;
-  padding:5px;
-  margin-bottom:3px;
-  border-radius:3px;
-  border:none;
-  opacity:0.5;
-  
-
-  &:hover{
-    background-color:lightblue ;
-
-    
-
-  }
-
-
-
- 
- }
- button{
-  width:210px;
-  padding:7px;
-  background-color:#1e81b0;
-  border:none;
-  border-radius:3px;
-  color:white;
-  font-weight:400;
-  &:hover{
-      background-color:#929ea8 !important;
-   }
-  
-
- }
-} 
-
-
-
-`
-const GoogleButton = styled.button`
-  width:210px;
-  padding:7px;
-  background-color:#1e81b0;
-  border:none;
-  border-radius:3px;
-  color:white;
-  font-weight:400;
-  position: relative;
- // z-index:5;
-  &:hover{
-      background-color:#76b5c5;
-   }
-  
-
-
-
-`*/

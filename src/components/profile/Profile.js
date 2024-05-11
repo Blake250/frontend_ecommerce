@@ -17,11 +17,12 @@ import { getUser, updatePhoto, updateUser } from '../../redux/slice/authSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
-
 const Profile = () => {
 
     const cloud_name = process.env.REACT_APP_CLOUD_NAME
+  
     const upload_preset = process.env.REACT_APP_UPLOAD_PRESET
+
     const url = "https://api.cloudinary.com/v1_1/blake250/image/upload"
   
       const {user, isLoggedIn, isLoading} = useSelector((state)=> state?.auth)
@@ -54,18 +55,14 @@ const Profile = () => {
       const dispatch = useDispatch()
    
     
-     
-  
-
- 
-    
 
 
 
-      useEffect( () => {
+   useEffect( () => {
 
         if (user === null) {
             dispatch(getUser());
+        
         } else {
             setProfile({
                 photo: user?.photo || '',
@@ -81,20 +78,10 @@ const Profile = () => {
     }, [dispatch, user]);
   
   
-         
-     useEffect(() => {
-      console.log("Profile component mounted");
-      const storedProfile = localStorage.getItem("profile");
-      if (storedProfile) {
-        setProfile(JSON.parse(storedProfile));
-      } else {
-        dispatch(getUser());
-      }
-    }, [dispatch]);
 
     
  
-      useEffect(()=>{
+    /* useEffect(()=>{
           if(user){
             
               setProfile({
@@ -106,17 +93,23 @@ const Profile = () => {
                   address : user?.address || "",
                 state : user?.state  || "",
                   country : user?.country  || "",
-
-         
-
-                
+     
             
             
               })
          
             
           }
-      },[user, dispatch])
+      },[user, dispatch])*/
+
+
+     /*useEffect(()=>{
+        if(user){
+     const getData = localStorage.getItem("profile")
+       set
+        }
+
+      },[user, dispatch])*/
       
   
       const saveProfile = (async (e)=>{
@@ -140,7 +133,8 @@ const Profile = () => {
  
 
    const dataObj = await dispatch(updateUser(userData));
-  localStorage.setItem("profile", JSON.stringify(dataObj));
+               //   await dispatch(getUser())
+ localStorage.setItem("profile", JSON.stringify(dataObj));
  
    
     }catch(error){
@@ -152,7 +146,7 @@ const Profile = () => {
 
   
       const handleImageChange = (e) => {
-        const file = e.target.files[0];
+        const file = e.target?.files[0];
         if (file) {
             setProfileImage(file);
             setImagePreview(URL.createObjectURL(file));
@@ -161,63 +155,37 @@ const Profile = () => {
     };
   
      
+    const savePhoto = async (e) => {
+      e.preventDefault();
+      try {
+        if (profileImage && (profileImage.type === "image/jpeg" || profileImage.type === "image/png" || profileImage.type === "image/jpg")) {
+          const formData = new FormData();
+          formData.append("file", profileImage);
+         formData.append("cloud_name", cloud_name);
+          formData.append("upload_preset", upload_preset);
+      
+          // Upload the image to Cloudinary
+          const response = await fetch(url, { method: "POST", body: formData });
+          const cloudinaryData = await response.json();
+          
+          // Update the user's photo
+          const updatedUserData = { ...profile, photo: cloudinaryData.secure_url }; // Include the photo field in the userData object
+          await dispatch(updatePhoto(updatedUserData)); 
+          
+          setImagePreview(cloudinaryData.secure_url);
+          setShowUploadButton(false);
+          setProfile({ ...profile, photo: cloudinaryData.secure_url });
+          
+          toast.success("Profile photo updated successfully");
+        }
+      } catch (error) {
+        toast.error("Error updating profile photo");
+        console.error("Error updating profile photo:", error);
+      }
+    };
     
 
-
   
-  const savePhoto = (async(e)=>{
-  
-    e.preventDefault()
-    let imageURL;
-
-    localStorage.setItem('profile', JSON.stringify(profile));
-
-  try {
-    // running conditional checks on the photo being uploaded
-    if(profileImage  && (profileImage.type ===  "image/jpeg" ||
-     profileImage.type === "image/png" ||
-      profileImage.type === "image/jpg")){
-     const image = new FormData()
-     image.append("file", profileImage)
-     image.append("cloud_name", cloud_name)
-     image.append("upload_preset", upload_preset)
-  
-     // save the image to cloudinary
-  
-     const response = await fetch(url, {method: "POST", body: image})
-       imageURL= await response.json()
-   
-    }
-   
-    // save the image to mongoDB
-    const userData = {
-  
-      photo: profileImage? imageURL : profile?.photo
-    }
-  
-  await dispatch(updatePhoto(userData))
-  setImagePreview(imageURL);
-  //setImagePreview(null)
-  setShowUploadButton(false) 
-  setProfile(userData); 
-
-
-  const updatedProfile = { ...profile, photo: imageURL };
-  setProfile(updatedProfile);
-  localStorage.setItem('profile', JSON.stringify(updatedProfile));
-
-
- 
-  } catch (error) {
-    toast.error(error.message)
-  }
-  
-  
-
-
-  
-  
-  })
 
 
 
@@ -232,15 +200,8 @@ const Profile = () => {
 
 
 
-  
- 
 
 
-  
-      
-
-  
-  
   
       
     return (

@@ -19,8 +19,60 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
       
     } 
 
+    //Deleting a Product
+    const deleteProduct = async (id)=>{
+      const response = await  axios.delete( `${API_URL}/${id}`, {withCredentials : true,  
+  
+      headers: {'Content-Type': 'application/json'}   
+  
+      }) 
+      
+      return response.data
+        
+      } 
+
+      // getting a single product
+      const getSingleProduct = async (id)=>{
+        const response = await  axios.get( `${API_URL}/${id} `, {withCredentials : true,  
+    
+        headers: {'Content-Type': 'application/json'}   
+    
+        }) 
+        
+        return response.data
+          
+        } 
+
+        
+      // getting a single product
+      const updateProduct = async (id, formData)=>{
+        const response = await  axios.patch( `${API_URL}/${id}`,formData, {withCredentials : true,  
+    
+        headers: {'Content-Type': 'application/json'}   
+    
+        }) 
+        
+        return response.data
+          
+        } 
 
 
+
+    
+
+
+
+  // getting  a product Category
+  const getProducts = async ()=>{
+    const response = await  axios.get( `${API_URL}`, {withCredentials : true,  
+
+    headers: {'Content-Type': 'application/json'}   
+
+    }) 
+    
+    return response.data
+      
+    } 
 
 
 
@@ -32,6 +84,10 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const productService = {
         createProducts,
+        getProducts,
+        deleteProduct,
+        getSingleProduct,
+        updateProduct
     }
 
 

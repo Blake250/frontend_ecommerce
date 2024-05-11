@@ -1,3 +1,5 @@
+
+
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,19 +11,42 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteCategories } from '../../feature/categoryAndBrand'
 import Loader from '../Loader'
 import { toast } from 'react-toastify'
-
+import { useState } from 'react'
+import Categories from './Categories'
+import { shortenText } from '../utils'
 
 const CreateCategoryList = () => {
-  const {isLoading, category}  = useSelector((state) => state?.category)
-
-
+  const {isLoading, categories}  = useSelector((state) => state?.category)
 
   const dispatch = useDispatch()
+  const [productCount, setProductCount] = useState(0); 
+
+
+
 
 useEffect(()=>{
+
   dispatch(getCategories())
 
+//setProductCount(productCount + 1); //
+
 },[dispatch])
+
+
+
+useEffect(() => {
+  adjustContainerHeight();
+}, [productCount, categories]); // Include categories in dependency array
+
+const adjustContainerHeight = () => {
+  const container = document.getElementById('container');
+  if (container) {
+   
+    const count = categories ? categories.length : 0;
+   
+    container.style.height = `${40 + count * 10}vh`;
+  }
+};
 
 
 
@@ -42,10 +67,10 @@ const confirmDelete = (slug) => {
       },
       {
         label: 'cancel',
-       /* onClick: () => {
+       // onClick: () => {
           // Your action here
-          console.log('User clicked No');
-        }*/
+          //console.log('User clicked No');
+       // }
       }
     ]
   });
@@ -57,25 +82,27 @@ const confirmDelete = (slug) => {
 const deleteCat = (async(slug)=>{
  await dispatch(deleteCategories(slug))
   await dispatch(getCategories())
+  setProductCount(categories.length); 
   return toast.success("category successfully deleted")
 
 })
 
 
   return (
-
-    <Container>
-      {isLoading && <Loader/>}
+    <>  
+   {isLoading && <Loader/>}
+    <Container  id='container'>
+     
         <Contain>
       <h3>All Categories</h3>
         <div>
-     { category.length === 0 ? 
+     { categories.length === 0 ? 
      (
       <p>No category Found</p>
      )
      : 
      (
-      <Table>
+      <Table  id="categoryContainer">
         <div>
 
          
@@ -93,7 +120,7 @@ const deleteCat = (async(slug)=>{
           <br />
           <TableBody>
             {
-              category.map((cat, index)=>{
+              categories.map((cat, index)=>{
              //   const {_id,name,slug} = cat
                 return(
                     <TableData key={cat?._id}>
@@ -106,7 +133,8 @@ const deleteCat = (async(slug)=>{
                       </p>
                   
                       <p>
-                      {cat?.name}
+                      {}
+                      {shortenText(cat?.name ,12)}
                       </p>
                       <p>   
                       <FaTrashAlt 
@@ -139,6 +167,7 @@ const deleteCat = (async(slug)=>{
         </div>
         </Contain>
     </Container>
+    </>
 
   )
 }
@@ -174,6 +203,7 @@ hr{
   
   width:100%;
   background-color: red !important; 
+  animation: slide-down 0.5s ease;
   //margin-left:-20px;
   
 }
@@ -187,6 +217,7 @@ animation: slide-down 0.5s ease;
   p{
     color:black !important;;
     font-size:15px;
+    animation: slide-down 0.5s ease;
   }
 }
 `
@@ -198,46 +229,52 @@ const TableBody = styled.div`
 
 width:120%;
 opacity:0.5;
+@media (max-width:768px) {
+   
+   // width:80% !important;
+  }
 
 `
 
-/*const TableRow = styled.div`
-display:flex;
-justify-content:space-between;
-  align-items:space-around;
-  @media  (max-width:768px) {
-    div{
-      padding:0 25px !important;
-      span{
-        padding:22px !important;
-      }
-    }
-  }
+// const TableRow = styled.div`
+// display:flex;
+// justify-content:space-between;
+//   align-items:space-around;
+//   @media  (max-width:768px) {
+//     div{
+//       padding:0 25px !important;
+//       span{
+//         padding:22px !important;
+//       }
+//     }
+//   }
 
-div{
+// div{
 
-  flex-direction:row;
-  padding:0 25px;
-  border-top: 2px solid var(--light-blue);
-        border-bottom: 2px solid var(--light-blue);
-  span{
-  padding:22px;
-  font-weight:600;
+//   flex-direction:row;
+//   padding:0 25px;
+//   border-top: 2px solid var(--light-blue);
+//         border-bottom: 2px solid var(--light-blue);
+//   span{
+//   padding:22px;
+//   font-weight:600;
 
   
-  }
+//   }
  
-}
+// }
 
 
-`*/
+//`
 
 const TableRow = styled.div`
   hr {
-      background-color: red !important; /* Change the color as desired */
+      background-color: red !important; 
       height: 2px; 
-      width:93%;
+      width:98%;
       border: none; 
+      animation: slide-down 0.5s ease;
+   
    //   margin-left:25px;
      
     }
@@ -245,8 +282,9 @@ div{
   display: flex;
   justify-content: space-between;
   align-items: center;
- padding: 0 15px;
- 
+ padding: 0 10px;
+ animation: slide-down 0.5s ease;
+
 
 
   span {
@@ -254,15 +292,16 @@ div{
     font-weight: 600;
     position: relative;
     line-height:0;
+    animation: slide-down 0.5s ease;
 
-    /* Add border lines above and below each span */
+
     &:before,
     &:after {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
-      border-bottom: 1px solid var(--light-blue); /* Adjust the color and thickness as needed */
+      border-bottom: 1px solid var(--light-blue); 
     }
 
     &:before {
@@ -283,10 +322,17 @@ div{
 
 const Container = styled.div`
 width:100%;
-height:160vh;
-min-height:210vh;
-margin-bottom:30px;
+//height:170vh;
+padding-bottom:50px;
+
+
+padding-left:320px;
+
+@media (max-width: 768px) {
+  padding-left:16px !important;
+      }
 position: relative;
+
 
 @keyframes slide-up {
     0% {
@@ -309,6 +355,9 @@ position: relative;
 
 
 const Contain = styled.div`
+
+
+
 div{
   //text-align:center;
   margin-left:2px;
@@ -318,6 +367,7 @@ div{
 h3{
     text-align:center;
     font-size:21px;
+    animation: slide-down 0.5s ease !important;
     @media (max-width:768px) {
       font-size:18px !important;
     }

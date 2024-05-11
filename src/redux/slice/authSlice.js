@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 import { toast } from "react-toastify";
-import { FaArrowAltCircleRight } from "react-icons/fa";
+
 
 
 
@@ -131,7 +131,7 @@ export const updatePhoto = createAsyncThunk("auth/updatePhoto", async (userData,
 // Initial state for auth
 const initialState = {
   isLoggedIn: false,
-  user: null,
+  user:null,
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -211,7 +211,7 @@ const authSlice = createSlice({
       .addCase(logOut.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isLoggedIn = true;
+        state.isLoggedIn = false;
         state.user = null;
         toast.success(action.payload);
         
@@ -322,8 +322,7 @@ const authSlice = createSlice({
 });
 
 export const { RESET_AUTH } = authSlice.actions;
-//export const {selectUser}= (state)=> state?.auth?.user
-
+export const {selectIsLoggedIn}= (state)=> state.auth.isLoggedIn
 
 
 export default authSlice.reducer;

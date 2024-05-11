@@ -34,6 +34,7 @@ div{
   font-size:16px;
   font-weight:600;
   margin-left:50px;
+ 
 
 
 
@@ -41,6 +42,7 @@ div{
     text-align:center !important;
   font-size:15px;
   font-weight:600;
+
     
   }
  

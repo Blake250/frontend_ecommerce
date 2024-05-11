@@ -16,8 +16,8 @@ import { toast, } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from "./Loader"
 import ShowOnLogin, {ShowOnLogOut} from './hiddenLinks/hideLink';
-import { useLocation } from 'react-router-dom';
-
+import { AdminOnlyLink } from './hiddenLinks/AdminOnlyRoute';
+import { CALCULATE_TOTAL_QUANTITY } from '../feature/cart/cartSlice';
 
 
 
@@ -32,6 +32,9 @@ const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  padding:0;
+  margin:0;
+
 
  
  // z-index: 4 !important;
@@ -276,13 +279,13 @@ align-items:center;
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [scrollPage, setScrollPage] = useState(false)
- // const [ProfilePhoto, setProfilePhoto] = useState(false)
-  const scrollRef = useRef(0);
-  const [showLoader, setShowLoader] = useState(false)
-  const {user, isLoggedIn, isLoading} = useSelector((state)=> state?.auth) || {}
-  //console.log(`your login is ${isLoggedIn}, ${user?.name}`)
- const location = useLocation()
+  const { cartItems, cartTotalQuantity } = useSelector((state) => state?.cart);
+  const {user, isLoggedIn, isLoading} = useSelector((state)=> state?.auth) 
 
+
+  useEffect(()=>{
+    dispatch(CALCULATE_TOTAL_QUANTITY())
+    },[dispatch, cartItems])
 
   const userData = user?.name || "..."
 
@@ -302,11 +305,6 @@ align-items:center;
         setShowLoader(false); // Hide loader after delay
   
     };*/
-
-
-
-
-
 
 
   
@@ -348,13 +346,10 @@ useEffect(() => {
 
 
   
-     
- // const navigate = useNavigate()
-  //const dispatch = useDispatch()
 
 const logOutUser = (async()=>{
 
- 
+  
  await dispatch(logOut())
 
  await dispatch(RESET_AUTH()) 
@@ -379,9 +374,13 @@ const logOutUser = (async()=>{
 
     <CartLink to="/cart">
 
-   
+        <span>cart </span> 
        <ShoppingCartOutlinedIcon fontSize='8px' />
-       
+       <b style={{
+        fontSize:'12px',
+        verticalAlign:'top'
+      
+      }} >{cartTotalQuantity} </b>
        </CartLink>
 
    
@@ -417,17 +416,19 @@ const logOutUser = (async()=>{
               <>  
           <div>  
             <ShowOnLogin> 
-          <NavLinkStyled   to="/home" onClick={closeMenu}>
+          <NavLinkStyled   to="/shop" onClick={closeMenu}>
 
-              <span>Home</span>
+              <span> Shop</span>
           </NavLinkStyled>
           </ShowOnLogin>
-          <ShowOnLogin> 
+          
+          <AdminOnlyLink> 
           <NavLinkStyled  to="/admin/home" onClick={closeMenu}>
            
            <span   >Admin</span>
           </NavLinkStyled>
-          </ShowOnLogin>
+          
+          </AdminOnlyLink>  
           </div>
           </>
           
@@ -473,7 +474,7 @@ const logOutUser = (async()=>{
         
             </ShowOnLogin>
             <ShowOnLogin> 
-            <NavLinkStyled to="/order" onClick={closeMenu}>
+            <NavLinkStyled to="/order-history" onClick={closeMenu}>
             <span>Orders</span>
           </NavLinkStyled>
           </ShowOnLogin>
@@ -484,10 +485,7 @@ const logOutUser = (async()=>{
           </NavLinkStyled> 
  
           </ShowOnLogin>
-            <NavLinkStyled to="/cart" onClick={closeMenu}>
-            <span>cart</span>
-          </NavLinkStyled>
-
+         
           {cart}
     
           </>

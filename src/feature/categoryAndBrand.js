@@ -54,6 +54,36 @@ export const createBrand = createAsyncThunk("category/createBrand", async (formD
     return await catAndBrandSlice.createBrand(formData);
   } catch (error) {
     const message =
+      (
+        error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    console.log(message);
+    return rejectWithValue(message);
+  }
+});
+
+
+//getBrands
+export const getBrands = createAsyncThunk("category/getBrands", async (_, { rejectWithValue }) => {
+  try {
+    return await catAndBrandSlice.getBrands();
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    console.log(message);
+    return rejectWithValue(message);
+  }
+});
+
+// delete Brands
+export const deleteBrand = createAsyncThunk("category/deleteBrand", async (slug, { rejectWithValue }) => {
+  try {
+    return await catAndBrandSlice.deleteBrand(slug);
+  } catch (error) {
+    const message =
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
@@ -66,10 +96,9 @@ export const createBrand = createAsyncThunk("category/createBrand", async (formD
 
 
 
-
 const initialState = {
-    category : [],
-    brand : [],
+    categories : [],
+    brands: [],
     isError: false,
     isLoading: false,
     isSuccess: false,
@@ -86,7 +115,7 @@ const categoryAndBrandSlice = createSlice({
    reducers:{
     RESET_CAT: (state) => {
         state.isLoggedIn = false;
-        state.category = null;
+        state.categories = null;
         state.isLoading = false;
         state.isSuccess = false;
         state.message = "";
@@ -106,7 +135,7 @@ const categoryAndBrandSlice = createSlice({
               state.isSuccess = true;
            //   state.category = action.push(action.payload)
               toast.success("category created successfully...");
-              console.log(action.payload)
+             // console.log(action.payload)
             })
             .addCase(createCategory.rejected, (state, action) => {
               state.isLoading = false;
@@ -126,7 +155,7 @@ const categoryAndBrandSlice = createSlice({
                  state.isError= false;
                   state.isLoading = false;
                   state.isSuccess = true;
-                 state.category = action.payload
+                 state.categories = action.payload
                 //  toast.success("category created successfully...");
                   console.log(action.payload)
                 })
@@ -136,7 +165,7 @@ const categoryAndBrandSlice = createSlice({
                   state.message = action.payload;
                 
                   toast.error(action.payload);
-                  console.log(action.payload)
+               //   console.log(action.payload)
                  
                 })
 
@@ -163,17 +192,18 @@ const categoryAndBrandSlice = createSlice({
                   })
 
 
-                    // creating a  getBrand
+                    // createBrand
                 .addCase(createBrand.pending, (state) => {
                   state.isLoading = true;
                 })
                 .addCase(createBrand.fulfilled, (state, action) => {
-                 state.isError= false;
                   state.isLoading = false;
                   state.isSuccess = true;
-                 state.category = action.payload
+                 state.isError= false;
+                
+              //  state.categories = action.payload
                  toast.success("Brand created successfully...");
-                  console.log(action.payload)
+
                 })
                 .addCase(createBrand.rejected, (state, action) => {
                   state.isLoading = false;
@@ -184,6 +214,52 @@ const categoryAndBrandSlice = createSlice({
                   console.log(action.payload)
                  
                 })
+
+                            //getBrands
+                            .addCase(getBrands.pending, (state) => {
+                              state.isLoading = true;
+                            })
+                            .addCase(getBrands.fulfilled, (state, action) => {
+                            
+                             state.isError= false;
+                              state.isLoading = false;
+                              state.isSuccess = true;
+                              state.brands = action.payload
+                            //  toast.success("category created successfully...");
+                         
+                            })
+                            .addCase(getBrands.rejected, (state, action) => {
+                              state.isLoading = false;
+                              state.isError = true;
+                              state.message = action.payload;
+                            
+                              toast.error(action.payload);
+                              console.log(action.payload)
+                             
+                            })
+
+                              //delete Brand
+                              .addCase(deleteBrand.pending, (state) => {
+                                state.isLoading = true;
+                              })
+                              .addCase(deleteBrand.fulfilled, (state, action) => {
+                               state.isError= false;
+                                state.isLoading = false;
+                                state.isSuccess = true;
+                                //state.brands = action.payload
+                              //  toast.success("category created successfully...");
+                              //  console.log(action.payload)
+                              })
+                              .addCase(deleteBrand.rejected, (state, action) => {
+                                state.isLoading = false;
+                                state.isError = true;
+                                state.message = action.payload;
+                              
+                                toast.error(action.payload);
+                                console.log(action.payload)
+                               
+                              })
+          
         }
       
         })

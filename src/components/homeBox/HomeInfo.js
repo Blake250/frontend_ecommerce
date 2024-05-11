@@ -1,4 +1,7 @@
-import React from 'react'
+
+
+
+import React, {useEffect} from 'react'
 //import { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
@@ -9,27 +12,66 @@ import ProductCategory from './ProductCategory';
 import PageHeading from './PageHeading';
 import BaseItems from '../footerBase/BaseItems';
 import FooterLinks from '../footerBase/FooterLinks';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../feature/product/productSlice';
+import { toast } from 'react-toastify';
+
 
 
 const HomeInfo = () => {
+  const {products} = useSelector((state)=> state?.product)
 
-  const productss = productData && productData.map((item, index)=>{
-   if  (!item || Object.keys(item).length === 0){
+  const dispatch = useDispatch()
+
+ 
+  useEffect(()=>{
+     dispatch(getProducts())
+  },[dispatch])
+
+
+const latest = products && products?.filter((product)=>{
+  return product?.quantity > 0
+
+})?.filter((product, index)=>{
+   return index < 7
+})
+
+
+const latestPhones = products?.filter((product)=>{
+ return product?.quantity > 0
+
+})?.filter((product, index)=>{
+   return index < 8
+
+}).filter((product)=>{
+
+return( product?.color === 'black' )
+
+
+
+} )
+
+
+
+
+
+  const latestProducts = latest && latest?.map((item, index)=>{
+   if  (!item || Object.keys(item)?.length === 0){
     console.log("No data exist")
    }
-   else{
-    console.log("The data was fetch successfully")
-   }
+ 
    
     return(
 
-      <div key={index.id}>
+      <div key={item.id}>
 
   <CarouselProducts
-  name={item.name}
-  imageUrl={item.imageUrl}
-  price={item.price}
-  description={item.description}
+  name={item?.name}
+  imageUrl={item?.image[0]}
+   regularPrice={item?.regularPrice}
+  price={item?.price}
+  description={item?.description}
+  product={item}
 
   
   
@@ -40,6 +82,34 @@ const HomeInfo = () => {
     )
   })
 
+
+  
+  const phoneProducts = latestPhones && latestPhones?.map((item, index)=>{
+    if  (!item || Object?.keys(item)?.length === 0){
+     console.log("No data exist")
+    }
+  
+    
+     return(
+ 
+       <div key={item.id}>
+ 
+   <CarouselProducts
+   name={item?.name}
+   imageUrl={item?.image[0]}
+   regularPrice={item?.regularPrice}
+   price={item?.price}
+   description={item?.description}
+   product={item}
+   
+   
+   />
+ 
+       </div>
+     
+     )
+   })
+
   return (
     <Container>
       <Contain>  
@@ -48,7 +118,7 @@ const HomeInfo = () => {
  
    
          
-   
+  
         <SectionA>
        
         <img src="./images/features/f1.png" alt="" />
@@ -58,7 +128,8 @@ const HomeInfo = () => {
 
         <SectionB>
         <img src="./images/features/f2.png" alt="" />
-        <h6>Online Order</h6>
+        
+      <h6  >Online Order   </h6>  
         </SectionB>
 
         <SectionC>
@@ -85,9 +156,11 @@ const HomeInfo = () => {
 
 
         </HouseSections>
-
+     
         <ProductStyle>
-          <CarouselItem products={productss} />
+         
+        <CarouselItem products={latestProducts} />
+      
         </ProductStyle>
 
         <CategoryBar>
@@ -98,13 +171,12 @@ const HomeInfo = () => {
         </CategoryBar>
 
     <PhoneClass>
-    <div>
-          <span>Mobile Phones</span>
-      <CarouselItem products={productss} />
-
+  
+          
+   
+    <CarouselItem products={phoneProducts} />
      
-     
-      </div>
+  
     </PhoneClass>
     <BaseItems/>
     <FooterLinks/>
@@ -125,13 +197,19 @@ div{
  // padding:5px 0;
  padding-top:13px 0 10px 0 ;
   border-radius:5px;
-padding-top:2px;
+//padding-top:6px;
+text-align:center !important;
+//display:flex;
+
+
+
   span{
   font-size:18px;
-  font-weight:600;
-  color:black;
- 
-  padding:5px;
+  font-weight:400;
+  color:green;
+   font-size:14px;
+  
+
 
 }
 
@@ -139,6 +217,8 @@ padding-top:2px;
 
 
 `
+
+
 const ProductStyle = styled.div`
 
 `

@@ -13,10 +13,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { validateEmail } from './utils';
 import { login } from '../redux/slice/authSlice';
 import {  useDispatch, useSelector } from 'react-redux';
-
-
-
-
+import { getCart } from '../feature/cart/cartSlice';
+import { useSearchParams } from 'react-router-dom';
+import { saveCartDB } from '../feature/cart/cartSlice';
 
 
 const Container = styled.div`
@@ -297,7 +296,26 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  const [urlParams] =useSearchParams()
+  console.log(`her is my ${urlParams}`)
+  const redirect = urlParams.get('redirect')
 
+
+  useEffect(() => {
+    if (isLoggedIn) {
+   //   navigate("/home");
+   if(redirect === 'cart'){
+    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+    return  navigate("/cart");
+   }
+ 
+   dispatch(getCart())
+
+    }
+  //
+
+    
+  }, [dispatch, isLoggedIn, navigate, redirect]);
 
 const loginUser = ( async (e)=>{
   e.preventDefault()
@@ -313,18 +331,14 @@ const loginUser = ( async (e)=>{
   
 
 const userData = { email, password, } 
-console.log(userData)
+//console.log(userData)
 await dispatch(login(userData))
 
 
 })
 
 
-useEffect(() => {
-  if (isLoggedIn) {
-    navigate("/home");
-  }
-}, [isLoggedIn, navigate]);
+
 
 
 

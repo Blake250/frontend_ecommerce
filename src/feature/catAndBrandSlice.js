@@ -46,7 +46,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
       } 
 
 
-      //Create Brand
+      //Create A  Brand
       const createBrand = async (formData)=>{
         const response = await  axios.post( `${API_URL}brand/createBrand`,formData, {withCredentials : true,  
     
@@ -59,6 +59,30 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
         } 
   
    
+         //get  Brands
+      const getBrands = async ()=>{
+        const response = await  axios.get( `${API_URL}brand/getBrands`, {withCredentials : true,  
+    
+        headers: {'Content-Type': 'application/json'}   
+    
+        }) 
+        
+        return response.data
+          
+        } 
+
+             //delete  Brands
+      const deleteBrand = async (slug)=>{
+        const response = await  axios.delete( `${API_URL}brand/${slug}`, {withCredentials : true,  
+    
+        headers: {'Content-Type': 'application/json'}   
+    
+        }) 
+        
+        return response.data.message
+          
+        } 
+  
     
 
 
@@ -73,6 +97,8 @@ const catAndBrandSlice = {
     getCategories,
     deleteCategories,
     createBrand,
+    getBrands,
+    deleteBrand,
 }
 
  

@@ -1,4 +1,6 @@
 import axios from "axios";
+import { toast } from "react-toastify";
+
 
 
 
@@ -12,9 +14,9 @@ headers.append('Authorization', 'Basic ' );
 
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
-console.log("API_URL:", BACKEND_URL);
+
   export const API_URL = `${BACKEND_URL}/api/user/`
-  console.log("API_URL:", API_URL);
+  
 
      // fetching the user's registration info
     const register = async (userData)=>{
@@ -93,8 +95,10 @@ const getUser = (async()=>{
   // update the user's Photo
   const updatePhoto = (async(userData)=>{
 
+   
+
     const response =  await axios.patch(`${API_URL}updatePhoto`,userData, {
-       withCredentials :true,
+      withCredentials :true,
         headers:{"Content-Type": "application/json"}
       })
       return response.data

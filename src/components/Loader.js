@@ -26,7 +26,7 @@ const LoadImage = styled.div`
   z-index: 999;
 `;
 
-function Loader() {
+/*function Loader() {
   const {isLoading} = useSelector((state) => state.auth);
 
   return (
@@ -39,15 +39,35 @@ function Loader() {
           </LoadImage>
           )}
         </Contain>
+
+      
+    </div>
+  );
+}
+
+export default Loader;*/
+
+
+function Loader() {
+  const {isLoading} = useSelector((state) => state.auth);
+
+  return (
+    <div>
+      
+        <Contain>
+      
+          <LoadImage>
+            <img src={LoadingImg} alt="Loading..." />
+          </LoadImage>
+        
+        </Contain>
+
       
     </div>
   );
 }
 
 export default Loader;
-
-
-
 
 
 

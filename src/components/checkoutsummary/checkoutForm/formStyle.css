@@ -1,0 +1,31 @@
+.checkout-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.checkout-content {
+  width: 90%; 
+ 
+  /* Adjust the width as needed */
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.checkout-item {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .checkout-form {
+    flex-direction: row;
+    gap: 20px;
+  }
+}

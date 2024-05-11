@@ -17,7 +17,7 @@ export default AdminHome
 
 const Container = styled.div`
 
-//display:flex;
+display:flex;
 `
 
 

@@ -1,5 +1,5 @@
 
-import React, {useState,useEffect, useRef} from 'react'
+import React, {useState,useEffect} from 'react'
 import styled from "styled-components"
 import { Link,NavLink } from 'react-router-dom'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import  {FaUserCircle} from "react-icons/fa"
 import { logOut, RESET_AUTH } from '../redux/slice/authSlice';
-import { toast, } from 'react-toastify';
+
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from "./Loader"
 import ShowOnLogin, {ShowOnLogOut} from './hiddenLinks/hideLink';

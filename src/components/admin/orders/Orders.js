@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getOrder } from '../../../feature/order/orderSlice';
@@ -18,14 +18,12 @@ import {
   Paper,
   AppBar,
   Toolbar,
-  Button,
-  Divider,
-  Stack,
+  
   //Link
 } from '@mui/material'
 
 export default function Order() {
-  const { isLoading, isError, message, orders } = useSelector((state) => state?.order);
+  const { isLoading, orders } = useSelector((state) => state?.order);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 

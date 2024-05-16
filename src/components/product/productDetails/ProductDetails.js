@@ -24,7 +24,7 @@ import {
   Stack,
   List, 
   ListItem, 
-  ListItemText,
+
   ListItemButton,
   
 } from '@mui/material';
@@ -430,7 +430,7 @@ onClick={()=> addToCart(product) }
 
 
 
-     {  product && product?.quantity > 0 ?
+     { product &&  product?.quantity > 0 ?
 
 (    
 <Box padding={'5px'} sx={{whiteSpace:'nowrap' }} >

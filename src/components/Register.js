@@ -5,12 +5,11 @@ import React, {useState,useEffect} from 'react'
 import styled from 'styled-components'
 import  registerImg from "./ecommerce/register.png"
 import { Link } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Loader from './Loader';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase';
+
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register, RESET_AUTH } from '../redux/slice/authSlice';

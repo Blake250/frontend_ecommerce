@@ -7,7 +7,7 @@ import NavBar from '../adminHome/NavBar'
 import AdminHome from '../adminHome/AdminHome'
 import { Routes, Route } from 'react-router-dom'
 import Categories from '../category/Categories'
-import { NavLink } from 'react-router-dom'
+
 import AddProduct from '../admin/addProduct/AddProduct'
 import ViewProducts from '../admin/viewProducts/ViewProducts'
 import EditProduct from '../admin/editProduct/EditProduct'

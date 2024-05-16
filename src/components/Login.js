@@ -2,10 +2,8 @@ import React, {useState, useEffect} from 'react'
 
 import styled from 'styled-components'
 import  loginImg from "./ecommerce/login.png"
-import { Link, NavLink } from 'react-router-dom'
-import {FaGoogle} from "react-icons/fa";
-import { auth, provider } from './firebase';
-import {  signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { Link } from 'react-router-dom'
+
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from './Loader';

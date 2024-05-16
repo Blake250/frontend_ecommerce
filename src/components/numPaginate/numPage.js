@@ -1,7 +1,7 @@
 
-import { useState } from 'react';
+
 import ReactPaginate from 'react-paginate';
-import styled from 'styled-components';
+
 
 import "./styles.css"
 

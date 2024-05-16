@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { Button, Typography, TextField, Stack, Box, Paper } from '@mui/material';
+import { Button, Typography, TextField, Stack, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { REMOVE_COUPON, getACoupon } from '../../feature/coupon/couponSlice';
 import { useDispatch } from 'react-redux';
@@ -37,7 +37,7 @@ const VerifyCoupon = () => {
   const [couponName, setCouponName] = useState('');
   const [showForm, setShowForm] = useState(false);
   const { coupon } = useSelector((state) => state?.coupon);
-  const { cartTotalAmount, initialCartTotalAmount } = useSelector((state) => state?.cart);
+ 
 
   const dispatch = useDispatch();
 

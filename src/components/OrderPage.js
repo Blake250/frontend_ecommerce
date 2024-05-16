@@ -5,9 +5,8 @@ import {BsFacebook}  from "react-icons/bs"
 import {BsLinkedin}  from "react-icons/bs"
 import {AiFillTwitterCircle}  from "react-icons/ai"
 import { NavLink } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import contactImg from "./ecommerce/b17.jpg"
-import {useNavigate} from "react-router-dom"
+import { toast } from 'react-toastify';
+
 //import imgLogo from "../../assests/ecommerce/b3.jpg"
 import imgLogo from "./ecommerce/b3.jpg"
 
@@ -17,7 +16,7 @@ import imgLogo from "./ecommerce/b3.jpg"
 const Order= () => {
 
   const form = useRef();
-  const navigate = useNavigate()
+ // const navigate = useNavigate()
 
 
   const sendEmail = (e) => {

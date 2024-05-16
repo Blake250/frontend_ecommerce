@@ -2,15 +2,7 @@
 
 
 
-
-
-
-
-
-
-
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +13,7 @@ import Loader from '../Loader';
 
 const CreateCategories = () => {
   const [name, setName] = useState('');
-  const { isLoading, user, categories } = useSelector((state) => state?.category);
+  const { isLoading} = useSelector((state) => state?.category);
   const dispatch = useDispatch();
 
 

@@ -1,15 +1,15 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
 
 
 
+/*
 let headers = new Headers();
 
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
 headers.append('GET', 'POST', 'OPTIONS');
-headers.append('Authorization', 'Basic ' );
+headers.append('Authorization', 'Basic ' );*/
 
 
 
@@ -20,10 +20,12 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
      // fetching the user's registration info
     const register = async (userData)=>{
-        const response = await  axios.post( `${API_URL}register`,userData, {withCredentials : true,
-        
-      
-        headers: {'Content-Type': 'application/json'}   
+        const response = await  axios.post( `${API_URL}register`,userData, 
+        {
+          
+    //      withCredentials : true,
+    
+    //    headers: {'Content-Type': 'application/json'}   
     
     
         }) 

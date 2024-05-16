@@ -4,7 +4,7 @@ import CreateBrand from './CreateBrand'
 import BrandList from './BrandList'
 import { getBrands } from '../../feature/categoryAndBrand'
 import { useDispatch } from 'react-redux'
-import ContainerDyna from '../admin/containerDynamic/containerDyna'
+
 
 
 const Brand = () => {

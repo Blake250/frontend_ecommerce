@@ -5,10 +5,10 @@ import { Home, Contact, Login, Register, Reset, OrderPage } from './components';
 import { Footer, Header } from './components';
 import styled from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
-import PrivateRoutes from './components/PrivateRoutes';
+
 import { ToastContainer } from 'react-toastify';
 import ErrorPage from './components/ErrorPage';
-import HomeInfo from './components/homeBox/HomeInfo';
+
 import PageMenu from './components/page/PageMenu';
 import Profile from './components/profile/Profile';
 import axios from 'axios';
@@ -52,7 +52,7 @@ const MainContent = styled.div`
 `;
 
 function App() {
-  axios.defaults.withCredentials = true;
+  //axios.defaults.withCredentials = true;
   const { user, isLoggedIn } = useSelector((state) => state?.auth);
   const dispatch = useDispatch();
 

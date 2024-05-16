@@ -1,11 +1,11 @@
 import React from 'react'
-import { Paper, Stack, Button, Grid, } from '@mui/material';
+import { Paper, Stack,  Grid, } from '@mui/material';
 import SummariesCheck from '../summariesCheck/SummariesCheck';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate,useSearchParams  } from 'react-router-dom';
+import { useNavigate,useSearchParams  } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { createOrder } from '../../feature/order/orderSlice';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const CheckoutWithFW = () => {
@@ -14,7 +14,7 @@ const CheckoutWithFW = () => {
 const { cartItems, cartTotalAmount } = useSelector((state) => state?.cart);
 
 const {coupon} = useSelector((state)=> state?.coupon)
-const { biLingAddress, shippingAddresses, paymentMethod } = useSelector((state) => state?.checkout)
+const { shippingAddresses, paymentMethod } = useSelector((state) => state?.checkout)
 
 const {user} = useSelector((state) => state?.auth);
 const couponOrder = coupon !== null ? coupon: {name: 'nil'} 

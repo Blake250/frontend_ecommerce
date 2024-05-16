@@ -1,109 +1,12 @@
-/*import React, { useEffect, useState } from 'react';
+
+
+
+import React, {  useState } from 'react';
 import Loader from '../../Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     Typography,
-    Button,
-    Stack,
-    InputLabel,
-    FormControl,
-    Select,
-    MenuItem
-} from '@mui/material';
-
-const ChangeOrderStatus = () => {
-    const [status, setStatus] = useState('');
-    const { isLoading } = useSelector((state) => state?.order);
-    const dispatch = useDispatch();
-
-    const updateOrder = () => {
-        // Logic to update order status
-    };
-
-    return (
-        <>
-            {isLoading && <Loader/>}
-
-            <Stack
-                spacing={2}
-                sx={{
-                    width: '50%',
-                    padding: '40px 0 55px 0',
-                    border: '2px solid green',
-                    borderRadius: '5px',
-                    '@media(max-width:768px)': {
-                        width: '65%',
-                        marginLeft: '13px',
-                        padding: '30px 0 45px 0'
-                    }
-                }}
-            >
-                <Stack>
-                    <Typography
-                        component='subtitle'
-                        variant='h5'
-                        sx={{
-                            textAlign: 'center',
-                            color: '#cc6600'
-                        }}
-                    >
-                        Update Status
-                    </Typography>
-                </Stack>
-                <FormControl fullWidth onSubmit={updateOrder}>
-                    <InputLabel
-                        id="demo-simple-select-label"
-                        sx={{
-                            fontSize: '13px'
-                        }}
-                    >
-                        status
-                    </InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={status}
-                        label="status"
-                        onChange={(e) => setStatus(e.target.value)}
-                        sx={{
-                            width: '96%',
-                            height: '40px',
-                            margin: '0 5px'
-                        }}
-                    >
-                        <MenuItem disabled value={''}>--choose one--</MenuItem>
-                        <MenuItem value={'shipped...'}> Shipped...</MenuItem>
-                        <MenuItem value={'Delivered' }>Delivered...</MenuItem>
-                        <MenuItem value={'processing...'}>Processing...</MenuItem>
-                        <MenuItem value={'Order Placed...'}>Order Placed...</MenuItem>
-                    </Select>
-                    <Button
-                        variant="contained"
-                        color='green'
-                        type='submit'
-                        sx={{
-                            '& .MuiButton-label': {
-                                fontSize: '14px', // Adjust font size
-                            },
-                        }}
-                    >
-                        Update Status
-                    </Button>
-                </FormControl>
-            </Stack>
-        </>
-    );
-};
-
-export default ChangeOrderStatus;*/
-
-
-import React, { useEffect, useState } from 'react';
-import Loader from '../../Loader';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    Typography,
-    Button,
+  
     Stack,
     InputLabel,
     FormControl,

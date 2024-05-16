@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import Loader from '../Loader'
 import { shortenText } from '../utils'
 import { getUser, updatePhoto, updateUser } from '../../redux/slice/authSlice'
-import { useLocation, useNavigate } from 'react-router-dom'
+
 
 
 const Profile = () => {
@@ -25,7 +25,7 @@ const Profile = () => {
 
     const url = "https://api.cloudinary.com/v1_1/blake250/image/upload"
   
-      const {user, isLoggedIn, isLoading} = useSelector((state)=> state?.auth)
+      const {user,  isLoading} = useSelector((state)=> state?.auth)
       
    
      const initialState = {

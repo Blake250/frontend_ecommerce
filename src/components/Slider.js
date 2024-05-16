@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import { sliderData } from './slideData'
+
 import SlideComponent from './SlideComponent'
 import HomeInfo from './homeBox/HomeInfo'
 

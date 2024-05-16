@@ -7,7 +7,7 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Loader from '../../Loader';
 import { shortenText } from '../../utils';
-import ReactPaginate from 'react-paginate';
+
 import Pagination from '../../numPaginate/numPage';
 import { confirmAlert } from 'react-confirm-alert'; // Import react-confirm-alert module
 import 'react-confirm-alert/src/react-confirm-alert.css'; 

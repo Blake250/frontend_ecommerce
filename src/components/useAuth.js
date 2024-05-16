@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 
 const useAuth = () => {
-    const {user} = useSelector((state)=> state.auth)
+   
     const [isSubscribed, setIsSubscribed] = useState("")
      useEffect(()=>{
         const unSubscribed = onAuthStateChanged(auth,(user)=>{

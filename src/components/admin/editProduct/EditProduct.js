@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //import { getSingleProduct} from '../../../feature/product/productSlice'
 import { useEffect, useState } from 'react'
 import { getSingleProduct, updateProduct,RESET_PRODUCT  } from '../../../feature/product/productSlice'
-import { getBrands, getCategories } from '../../../feature/categoryAndBrand'
+
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import ProductForm from '../productForm/ProductForm'

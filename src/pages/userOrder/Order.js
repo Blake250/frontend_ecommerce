@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../components/Loader';
 import Pagination from '../../components/numPaginate/numPage';
@@ -24,7 +24,7 @@ import {
 import { getOrder } from '../../feature/order/orderSlice';
 
 export default function Order() {
-  const { isLoading, isError, message, orders } = useSelector((state) => state?.order);
+  const { isLoading, orders } = useSelector((state) => state?.order);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { IoMenu } from "react-icons/io5";
+
 const NavBar = () => {
     const { user } = useSelector((state) => state?.auth);
     const [isOpen, setIsOpen] = useState(false)

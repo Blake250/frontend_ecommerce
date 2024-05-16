@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CardMedia, CardActions, CardContent, Typography, Stack, Card, Button } from '@mui/material';
 import { shortenText } from '../../utils';
-import { toast, } from 'react-toastify';
+
 import DOMPurify from 'dompurify';
 import { useDispatch } from 'react-redux';
 import { ADD_TO_CART } from '../../../feature/cart/cartSlice';

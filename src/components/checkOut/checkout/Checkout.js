@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../../checkoutsummary/checkoutForm/CheckoutForm";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import  {extractIdAndCartQuantity}  from "../../utils";
 import {toast} from 'react-toastify'
 //import './formStyle.css'

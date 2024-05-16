@@ -1,4 +1,4 @@
-import {initializeApp} from "firebase/app"
+/*import {initializeApp} from "firebase/app"
 import {getFirestore} from "firebase/firestore"
 import {GoogleAuthProvider, getAuth} from  "firebase/auth";
 import {getStorage} from "firebase/storage"
@@ -28,4 +28,4 @@ const provider = new GoogleAuthProvider(firebaseApp);
 
 
 export {auth, provider, storage}
-export default db;
+export default db;*/

@@ -5,16 +5,16 @@ import React, {useEffect} from 'react'
 //import { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
-import { productData } from '../carousel/dataItem';
+
 import CarouselItem from '../carousel/Carouseltem';
 import CarouselProducts from '../carousel/CarouselProducts';
 import ProductCategory from './ProductCategory';
-import PageHeading from './PageHeading';
+
 import BaseItems from '../footerBase/BaseItems';
 import FooterLinks from '../footerBase/FooterLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../feature/product/productSlice';
-import { toast } from 'react-toastify';
+
 
 
 

@@ -12,7 +12,7 @@ import { deleteCategories } from '../../feature/categoryAndBrand'
 import Loader from '../Loader'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import Categories from './Categories'
+
 import { shortenText } from '../utils'
 
 const CreateCategoryList = () => {
@@ -98,7 +98,11 @@ const deleteCat = (async(slug)=>{
         <div>
      { categories.length === 0 ? 
      (
-      <p>No category Found</p>
+      <p
+      style={{
+        textAlign:'center'
+      }}
+      >No category Found</p>
      )
      : 
      (

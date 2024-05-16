@@ -1,7 +1,7 @@
 
 
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineCloudServer } from "react-icons/ai";
 import {BsTrash} from "react-icons/bs"
@@ -16,7 +16,7 @@ const [selectedImages, setSelectedImages] = useState([])
 const [images, setImages] = useState([])
 const [progress, setProgress] = useState(0)
 const [uploading, setUploading] = useState(false)
-const {user, isLoggedIn} = useSelector((state)=> state?.auth)
+//const {user, isLoggedIn} = useSelector((state)=> state?.auth)
 
 const upload_preset = process.env.REACT_APP_UPLOAD_PRESET
 //const urlMain = "https://api.cloudinary.com/v1_1/blake250/image/upload" 

@@ -3,16 +3,16 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { getCategories } from '../../feature/categoryAndBrand'
+
 import { FaTrashAlt } from "react-icons/fa";
 import { confirmAlert } from 'react-confirm-alert'; // Import react-confirm-alert module
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
-import { deleteCategories } from '../../feature/categoryAndBrand'
+
 import { getBrands, deleteBrand } from '../../feature/categoryAndBrand'
 import Loader from '../Loader'
 import { toast } from 'react-toastify'
 import { shortenText } from '../utils'
-import { Stack } from '@mui/material'
+
 
 
 const BrandList = () => {

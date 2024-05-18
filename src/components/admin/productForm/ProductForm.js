@@ -6,7 +6,7 @@ import {BsTrash} from "react-icons/bs"
 import UploadWidgets from '../addProduct/uploadWidgets/UploadWidgets';
 import { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories,getBrands } from '../../../feature/categoryAndBrand';
+
 
 
 const ProductForm = ({

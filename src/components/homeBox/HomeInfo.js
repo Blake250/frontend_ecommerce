@@ -1,8 +1,10 @@
 
 
 
-import React, {useEffect} from 'react'
-//import { StyledComponent } from 'styled-components'
+
+
+
+import React, {useEffect} from 'react';
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
 
@@ -15,183 +17,122 @@ import FooterLinks from '../footerBase/FooterLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../feature/product/productSlice';
 
-
-
-
 const HomeInfo = () => {
-  const {products} = useSelector((state)=> state?.product)
+  const { products } = useSelector((state) => state.product);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
- 
-  useEffect(()=>{
-     dispatch(getProducts())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
+  const latest = products && products.filter((product) => product.quantity > 0).slice(0, 7);
+  const latestPhones = products
+    ?.filter((product) => product.quantity > 0)
+    ?.slice(0, 8)
+    ?.filter((product) => product.price > 230);
 
-const latest = products && products?.filter((product)=>{
-  return product?.quantity > 0
-
-})?.filter((product, index)=>{
-   return index < 7
-})
-
-
-const latestPhones = products?.filter((product)=>{
- return product?.quantity > 0
-
-})?.filter((product, index)=>{
-   return index < 8
-
-}).filter((product)=>{
-
-return( product?.color === 'black' )
-
-
-
-} )
-
-
-
-
-
-  const latestProducts = latest && latest?.map((item, index)=>{
-   if  (!item || Object.keys(item)?.length === 0){
-    console.log("No data exist")
-   }
- 
-   
-    return(
-
-      <div key={item.id}>
-
-  <CarouselProducts
-  name={item?.name}
-  imageUrl={item?.image[0]}
-   regularPrice={item?.regularPrice}
-  price={item?.price}
-  description={item?.description}
-  product={item}
-
-  
-  
-  />
-
-      </div>
-    
-    )
-  })
-
-
-  
-  const phoneProducts = latestPhones && latestPhones?.map((item, index)=>{
-    if  (!item || Object?.keys(item)?.length === 0){
-     console.log("No data exist")
+  const latestProducts = latest && latest.map((item) => {
+    if (!item || Object.keys(item).length === 0) {
+      console.log("No data exist");
+      return null;
     }
-  
-    
-     return(
- 
-       <div key={item.id}>
- 
-   <CarouselProducts
-   name={item?.name}
-   imageUrl={item?.image[0]}
-   regularPrice={item?.regularPrice}
-   price={item?.price}
-   description={item?.description}
-   product={item}
-   
-   
-   />
- 
-       </div>
-     
-     )
-   })
+
+    return (
+      <div key={item.id}>
+        <CarouselProducts
+          name={item.name}
+          imageUrl={item.image[0]}
+          regularPrice={item.regularPrice}
+          price={item.price}
+          description={item.description} 
+          product={item}
+        />
+      </div>
+    );
+  });
+
+  const phoneProducts = latestPhones?.map((item) => {
+    if (!item || Object.keys(item).length === 0) {
+      console.log("No data exist");
+      return null;
+    }
+
+    return (
+      <div key={item.id}>
+        <CarouselProducts
+          name={item.name}
+          imageUrl={item.image[0]}
+          regularPrice={item.regularPrice}
+          price={item.price}
+          description={item.description} // Access description directly
+          product={item}
+        />
+      </div>
+    );
+  });
 
   return (
     <Container>
-      <Contain>  
-    
-      <HouseSections> 
- 
-   
-         
-  
-        <SectionA>
-       
-        <img src="./images/features/f1.png" alt="" />
-        <NavLink  to={"/order"}> <h6  >Free Shipping</h6>  </NavLink>
-      
-        </SectionA>
-
-        <SectionB>
-        <img src="./images/features/f2.png" alt="" />
-        
-      <h6  >Online Order   </h6>  
-        </SectionB>
-
-        <SectionC>
-        <img src="./images/features/f3.png" alt="" />
-        <h6>Save Money</h6>
-        </SectionC>
-
-        <SectionD>
-        <img src="./images/features/f4.png" alt="" />
-
-      <h6>Promotions</h6>  
-        </SectionD>
-
-        <SectionE>
-        <img src="./images/features/f5.png" alt="" />
-        <h6>Happy Sell </h6>
-        </SectionE>
-
-        <SectionF>
-        <img src="./images/features/f6.png" alt="" />
-    
-        <NavLink to={"./footer"} > <h6>F24/7 Support</h6>   </NavLink> 
-        </SectionF>
-
-
+      <Contain>
+        <HouseSections>
+          <SectionA>
+            <img src="./images/features/f1.png" alt="" />
+            <NavLink to={"/order"}> <h6>Free Shipping</h6> </NavLink>
+          </SectionA>
+          <SectionB>
+            <img src="./images/features/f2.png" alt="" />
+            <h6>Online Order</h6>
+          </SectionB>
+          <SectionC>
+            <img src="./images/features/f3.png" alt="" />
+            <h6>Save Money</h6>
+          </SectionC>
+          <SectionD>
+            <img src="./images/features/f4.png" alt="" />
+            <h6>Promotions</h6>
+          </SectionD>
+          <SectionE>
+            <img src="./images/features/f5.png" alt="" />
+            <h6>Happy Sell</h6>
+          </SectionE>
+          <SectionF>
+            <img src="./images/features/f6.png" alt="" />
+            <NavLink to={"./footer"}> <h6>24/7 Support</h6> </NavLink>
+          </SectionF>
         </HouseSections>
-     
         <ProductStyle>
-         
-        <CarouselItem products={latestProducts} />
-      
+          <CarouselItem products={latestProducts} />
         </ProductStyle>
-
         <CategoryBar>
           <div>
-          <span>Categories</span>
-            <ProductCategory/>
+            <span>Categories</span>
+            <ProductCategory />
           </div>
         </CategoryBar>
-
-    <PhoneClass>
-  
-          
-   
-    <CarouselItem products={phoneProducts} />
-     
-  
-    </PhoneClass>
-    <BaseItems/>
-    <FooterLinks/>
-
-    
-        </Contain>  
+        <PhoneClass>
+          <CarouselItem products={phoneProducts} />
+        </PhoneClass>
+        <BaseItems />
+        <FooterLinks />
+      </Contain>
     </Container>
-  )
-}
+  );
+};
 
-export default HomeInfo
+export default HomeInfo;
 
 
 const PhoneClass  = styled.div`
 background-color:darkgray;
+
+@media(max-width:768px){
+    width: 100%;
+  //height: 100%;
+  div{span{
+    font-size:15px !important;
+  }}
+  }
 
 div{
  // padding:5px 0;
@@ -207,7 +148,7 @@ text-align:center !important;
   font-size:18px;
   font-weight:400;
   color:green;
-   font-size:14px;
+   font-size:18px;
   
 
 

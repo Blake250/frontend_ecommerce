@@ -70,7 +70,7 @@ const navigate = useNavigate()
 
 
 
-   },[payment, ref, navigate,cartTotalAmount])
+   },[payment, ref, navigate,cartTotalAmount,])
 
  
 

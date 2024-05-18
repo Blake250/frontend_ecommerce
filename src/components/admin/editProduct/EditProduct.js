@@ -98,7 +98,7 @@ const saveProduct = (async(e)=>{
 {isLoading && (<Loader/>)}
       <Contain  >
        <div>   
-   <h3> AddProduct </h3> 
+  
    <ProductForm
    
   product={product}
@@ -125,7 +125,12 @@ export default EditProduct
 
 const Container = styled.div`
 width:100%;
-height:100%;
+//height:100%;
+padding-bottom:10px;
+@media(max-width:768px){
+  //height:100%;
+margin-bottom:0px !important;
+  }
 
 `
 

@@ -23,9 +23,9 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
         const response = await  axios.post( `${API_URL}register`,userData, 
         {
           
-    //      withCredentials : true,
+          withCredentials : true,
     
-    //    headers: {'Content-Type': 'application/json'}   
+      headers: {'Content-Type': 'application/json'}   
     
     
         }) 

@@ -52,7 +52,7 @@ const MainContent = styled.div`
 `;
 
 function App() {
-  //axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
   const { user, isLoggedIn } = useSelector((state) => state?.auth);
   const dispatch = useDispatch();
 

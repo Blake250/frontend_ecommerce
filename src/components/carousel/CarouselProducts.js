@@ -34,16 +34,33 @@ const CarouselProducts = ({ imageUrl, name, price, product,regularPrice, descrip
               <span>${`${price}`}</span>
             
               <h4>{name && shortenText(name, 18)}</h4>
-              <Typography style={{
+              <p
                 //textAlign:'start'
-              }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(shortenText(description, 45)) }} />
+                sx={{
+                  whiteSpace:'wrap',
+                 width:'50px',
+                 '@media(max-width:768px)':{
+                  fontSize:'14px',
+                 
+                 }
+                }}
+               
+             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( shortenText(description, 75)) }} >
+              </p>
             </div>
           </ItemDetails>
         </NavItem>
+       
+      
+        <Click> 
+      
         <Button onClick={() => addToCart(product)}>
           <p   >Add To Cart</p>
        
         </Button>
+        </Click>
+
+      
       
       </Contain>
     </Container>
@@ -52,16 +69,35 @@ const CarouselProducts = ({ imageUrl, name, price, product,regularPrice, descrip
 
 export default CarouselProducts;
 
+
+const  Click = styled.div`
+margin-bottom:300px;
+position:relative;
+z-index:999;
+width:100%;
+//height:100vh;
+@media(max-width:768px){
+font-size:14px;
+whiteSpace:wrap
+  }
+
+`
+
 const Container = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   background-color: darkgray;
+  @media(max-width:768px){
+    width: 100%;
+  //height: 100%;
+  }
+
 
 `;
 
 const Button = styled.div`
   position: absolute;
-  margin-bottom: 14px;
+  margin-bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
@@ -122,6 +158,12 @@ const ImgPhoto = styled.div`
 const ItemDetails = styled.div`
 @media (max-width:768px) {
   padding:6px;
+  div{
+    p{
+      white-space:wrap;
+      font-size:14px !important;
+    }
+  }
 }
 
 position: relative;
@@ -130,8 +172,9 @@ position: relative;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  line-height: 0;
-  padding:10px;
+  line-height: 0 ;
+
+ padding:10px;
   border: 1px solid lightblue;
   border-radius: 5px;
   background-color: #cc9900;
@@ -140,7 +183,7 @@ position: relative;
   }
   div {
     p {
-      font-size: 15px;
+      font-size: 17px;
     }
     h4 {
       font-size: 18px;

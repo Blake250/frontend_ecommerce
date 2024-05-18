@@ -183,7 +183,12 @@ export default ViewProducts;
 
 const Container = styled.div`
   width: 100%;
-  padding: 20px;
+  padding: 30px;
+  @media(max-width:768px){
+    width: 100%;
+    //padding-bottom: 30px;
+  
+  }
 
 
   @keyframes slide-up {

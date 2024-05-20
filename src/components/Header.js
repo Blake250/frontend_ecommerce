@@ -505,17 +505,17 @@ const logOutUser = (async()=>{
         <div>
           <ShowOnLogin> 
           <LogoLink to="/home" className="btn">
-            e<span>SHOP.</span>
+            <span>ESHOP.</span>
           </LogoLink>
 
-          <NavLinkStyled to="/contact" onClick={closeMenu}>
-            <span>Contact </span>
+          <NavLinkStyled to="/shop" onClick={closeMenu}>
+            <span>Shop </span>
           </NavLinkStyled>
           <NavLinkStyled to="/home" onClick={closeMenu}>
             <span>Home</span>
           </NavLinkStyled>
          
-          <NavLinkStyled to="/order" onClick={closeMenu}>
+          <NavLinkStyled to="/order-history" onClick={closeMenu}>
             <span>Orders</span>
           </NavLinkStyled>
           </ShowOnLogin>

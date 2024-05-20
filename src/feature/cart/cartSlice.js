@@ -7,7 +7,7 @@ import cartService from '../../pages/cart/cartService';
 
 
 //const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
-const FRONTEND_URL = `https://shopito-app-zs1v.onrender.com`
+const FRONTEND_URL = "https://shopito-app-zs1v.onrender.com"
 
 
 

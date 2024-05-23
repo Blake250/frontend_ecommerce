@@ -37,15 +37,16 @@ const CarouselProducts = ({ imageUrl, name, price, product,regularPrice, descrip
               <p
                 //textAlign:'start'
                 sx={{
-                  whiteSpace:'wrap',
-                 width:'50px',
+                  whiteSpace:'nowrap',
+              
                  '@media(max-width:768px)':{
                   fontSize:'14px',
+                  width:'400px',
                  
                  }
                 }}
                
-             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( shortenText(description, 75)) }} >
+             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( shortenText(description, 100)) }} >
               </p>
             </div>
           </ItemDetails>
@@ -144,6 +145,11 @@ const NavItem = styled(Link)`
 `;
 
 const ImgPhoto = styled.div`
+@media (max-width:768px) {
+  width: 100px !important;
+    height: 35vh;
+ 
+}
   margin-left: 5px;
   img {
     width: 310px;
@@ -158,9 +164,11 @@ const ImgPhoto = styled.div`
 const ItemDetails = styled.div`
 @media (max-width:768px) {
   padding:6px;
+  //height:auto;
+ 
   div{
     p{
-      white-space:wrap;
+      white-space:nowrap !important;
       font-size:14px !important;
     }
   }

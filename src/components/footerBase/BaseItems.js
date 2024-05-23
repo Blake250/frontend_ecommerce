@@ -45,11 +45,16 @@ height:100%;
 `
 const Home = styled.div`
     position: relative; 
-   
+
     @media (max-width:768px) {
+      div{
+      
+      }
+      
         span{
             margin-top:0px !important;
             a{
+              white-space:nowrap;
                 font-weight:500 !important;
                 padding:7px 2px !important;
                 font-size:15px !important;
@@ -74,6 +79,7 @@ span{
 
 a{
     background-color: transparent;
+    white-space:nowrap;
   overflow: hidden;
   color: var(--color-white);
   text-decoration:none;

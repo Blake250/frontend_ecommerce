@@ -31,6 +31,7 @@ const BottomPage = styled.div`
 
 div{
   text-align:center;
+  white-space:nowrap;
   font-size:16px;
   font-weight:600;
   margin-left:50px;
@@ -39,9 +40,14 @@ div{
 
 
   @media (max-width: 768px) {
+  
+  div{
     text-align:center !important;
   font-size:15px;
   font-weight:600;
+  white-space:nowrap;
+
+  }
 
     
   }

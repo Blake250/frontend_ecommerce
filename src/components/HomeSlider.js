@@ -26,7 +26,7 @@ const HomeSlider = (props) => {
             
              
               <h4 
-              onClick={()=> navigate("/contact")} >
+              onClick={()=> navigate("/shop")} >
                  <a>
                   Shop Now
                  </a>

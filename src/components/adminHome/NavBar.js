@@ -25,7 +25,11 @@ const NavBar = () => {
                 <NavContainer>
                     <div>
                         <FaUserCircle size={40} color="#fff" />
-                        <p> {userName} </p>
+                        <p
+                        style={{
+                            whiteSpace:'nowrap'
+                        }}
+                        > {userName} </p>
                     </div>
                 </NavContainer>
             </Contain>
@@ -118,6 +122,7 @@ const SubmitBtn = styled.div`
 
 const NavProduct = styled.div`
     border-top: 15px;
+
  
 
 
@@ -138,17 +143,27 @@ const NavProduct = styled.div`
         content: '';
         position: absolute;
         bottom: 0;
-        left: 50%;
+        left: 40%;
         transform: translateX(-50%);
         width: 330px;
         border-bottom: 1px solid black;
         padding:0 56px;
+     
  
       &:first-child{
          margin-left:30px;
       };
         @media (max-width: 768px) {
-            width: 185px !important;
+            width: 180px !important;
+            left:20px !important;
+            
+
+         
+        }
+        @media (max-width: 400px) {
+            width: 150px !important;
+            left:10px !important;
+            
 
          
         }
@@ -163,6 +178,12 @@ const NavProduct = styled.div`
         background-color: #ccc;
         padding-top: -15px;
         margin-bottom: 12px !important;
+        a{
+            p{
+                white-space:nowrap !important;
+            }
+        }
+     
     }
 
     p {
@@ -171,6 +192,7 @@ const NavProduct = styled.div`
         line-height: 0;
         font-weight: 600;
         color: black;
+      
     
     }
 
@@ -205,6 +227,7 @@ const NavContainer = styled.div`
    animation: slide-down 0.5s ease;
     padding: 8px;
     div {
+        
        display: flex;
         align-items: center;
         justify-content: center;
@@ -215,6 +238,7 @@ const NavContainer = styled.div`
             color: black;
             line-height: 0;
             font-weight: 600;
+            white-space:nowrap !important;
             
         }
     }

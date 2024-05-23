@@ -69,6 +69,12 @@ const Container = styled.div`
 `;
 
 const Contain = styled.div`
+@media (max-width:768px) {
+  
+    display:flex;
+    flex-direction:column;
+  
+}
   overflow-x: hidden;;
   background-image: url("./images/features/b14.png");
  background-color:black;
@@ -81,9 +87,16 @@ width: 100%;
 `;
 
 const LinksContainer = styled.div`
+/*@media (max-width:768px) {
+  display:flex;
+    flex-direction:column  !important;
+  div{
+    
+  }
+}*/
 
   display: flex;
-  flex-direction:row;
+   flex-direction:row !important;
   align-items:center;
   justify-content:space-around;
   div{
@@ -116,6 +129,16 @@ const LinksContainer = styled.div`
 `;
 
 const Features = styled.div`
+   display:flex;
+  flex-direction:row !important;
+@media (max-width:500px) {
+ 
+  div{
+  //  display:flex;
+    flex-direction:row !important;
+  }
+}
+
   margin-left: 0px; 
  span {
     position: relative;

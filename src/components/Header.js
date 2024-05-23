@@ -360,7 +360,20 @@ const logOutUser = (async()=>{
 })
 
 
+const cartData = (
 
+  <CartLink  to="/" >
+
+    <span>cart </span> 
+   <ShoppingCartOutlinedIcon fontSize='8px' />
+   <b style={{
+    fontSize:'12px',
+    verticalAlign:'top'
+  
+  }} >{0} </b>
+   </CartLink>
+
+)
 
 
 
@@ -370,18 +383,16 @@ const logOutUser = (async()=>{
 
 
   const cart = (
-          
-
     <CartLink to="/cart">
 
-        <span>cart </span> 
-       <ShoppingCartOutlinedIcon fontSize='8px' />
-       <b style={{
-        fontSize:'12px',
-        verticalAlign:'top'
-      
-      }} >{cartTotalQuantity} </b>
-       </CartLink>
+    <span>cart </span> 
+   <ShoppingCartOutlinedIcon fontSize='8px' />
+   <b style={{
+    fontSize:'12px',
+    verticalAlign:'top'
+  
+  }} >{cartTotalQuantity} </b>
+   </CartLink>
 
    
 )
@@ -422,13 +433,13 @@ const logOutUser = (async()=>{
           </NavLinkStyled>
           </ShowOnLogin>
           
-          <AdminOnlyLink> 
+          <AdminOnlyLink>    
           <NavLinkStyled  to="/admin/home" onClick={closeMenu}>
            
            <span   >Admin</span>
           </NavLinkStyled>
-          
           </AdminOnlyLink>  
+      
           </div>
           </>
           
@@ -485,8 +496,10 @@ const logOutUser = (async()=>{
           </NavLinkStyled> 
  
           </ShowOnLogin>
+
+         {cart}
          
-          {cart}
+         
     
           </>
    

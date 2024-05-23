@@ -81,35 +81,35 @@ const Profile = () => {
 
     
  
-    /* useEffect(()=>{
-          if(user){
+    // useEffect(()=>{
+    //       if(user){
             
-              setProfile({
-                photo : user?.photo || "",
-                  name : user?.name ||  "",
-                  email : user?.email || "",
-                  phone : user?.phone  || "",
-                  role : user?.role  || "",
-                  address : user?.address || "",
-                state : user?.state  || "",
-                  country : user?.country  || "",
+    //           setProfile({
+    //             photo : user?.photo || "",
+    //               name : user?.name ||  "",
+    //               email : user?.email || "",
+    //               phone : user?.phone  || "",
+    //               role : user?.role  || "",
+    //               address : user?.address || "",
+    //             state : user?.state  || "",
+    //               country : user?.country  || "",
      
             
             
-              })
+    //           })
          
             
-          }
-      },[user, dispatch])*/
+    //       }
+    //   },[user, dispatch])
 
 
-     /*useEffect(()=>{
+     useEffect(()=>{
         if(user){
      const getData = localStorage.getItem("profile")
-       set
+       
         }
 
-      },[user, dispatch])*/
+      },[user, dispatch])
       
   
       const saveProfile = (async (e)=>{
@@ -564,6 +564,13 @@ const Profile = () => {
   const Container = styled.div`
   width:100%;
   height:60% ;
+  @media (max-width: 768px) {
+        
+    width:80%;
+  height:60% ;  
+
+         
+        }
 
   position: relative;
   

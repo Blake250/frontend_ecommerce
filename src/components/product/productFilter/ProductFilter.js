@@ -100,11 +100,18 @@ useEffect(()=>{
 
 
   return (
-    <Box>
+    <Box
+
+    >
+
+
       <Typography variant="h6" sx={{ my: 2, textAlign: 'center', border: '1px solid black', fontWeight: '400', color: '#986d41' }}>
         Categories
       </Typography>
-      <List>
+      <List
+      
+      
+      >
         {allCategories?.map((cat, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton
@@ -186,7 +193,7 @@ useEffect(()=>{
          <Typography  
          sx={{textAlign:'center',
          fontSize:'13px',
-         textAlign:'center',
+         //textAlign:'center',
         
         
         }} >

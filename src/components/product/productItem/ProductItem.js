@@ -40,9 +40,10 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
     <Stack spacing={1} marginTop={4} sx={{ bgcolor: '#fff', height: '100%', width: '100%' }}>
     
       <Stack
+      spacing={4}
   sx={{
     marginBottom:"1rem",
-      
+    
       
   
   }}
@@ -54,17 +55,18 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
         <Card sx={{ 
          // width: grid ? '18rem' : '45%',
          width: grid ? '18rem' : '50%',
-     
+    
          // height: '100%' ,
           backgroundColor: '#fff',
           display: 'flex',
           flexDirection: grid ? 'column' : 'row',
           padding:'7px',
+          marginLeft: grid ? '0px' : '100px',
         
         
           '@media (max-width: 768px)': {
      
-            width: grid ? '100%' : '96%',
+            width: grid ? '50%' : '96%',
             paddingRight:'30px'
           },
         }}>
@@ -76,7 +78,7 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
              
               sx={{
                 borderTop:'4px',
-               
+                
                 width: '100%',
                 height: '100%',
                 height: grid ? '30vh' : '100%', 
@@ -113,7 +115,7 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
           //  width: '100px', 
                 
             //  marginRight:'30px',
-         //  height: '100%',
+       //  height: '50%',
           },
              }}>
           <Typography  variant='body1' component='h6' color='error'>
@@ -133,8 +135,9 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
                   {!grid && (
               <Typography sx={{
                 fontSize:'13px',
+                paddingTop:'20px'
                
-              }} variant="body1" component="h6" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( shortenText(product?.description, 30))  }} />
+              }} variant="body1" component="h6" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( shortenText(product?.description, 90))  }} />
             )}
                 
                 <CardActions>

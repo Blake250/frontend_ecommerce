@@ -413,7 +413,7 @@ const downloadPDF = ()=>{
             sx={{
                maxHeight: '400px',
                '@media(max-width:768px)': {
-               // width:'100vw',
+                width:'100vw',
                }
           
           }} component={Paper}>

@@ -458,8 +458,11 @@ onClick={()=> addToCart(product) }
  onClick={()=> alert('Product is Out of Stock')}
 variant='contained' 
 color='warning'
-size='small'
-sx={{ "&:hover": {backgroundColor: "orange", paddingLeft:'-20px' } }}
+
+size='medium'
+sx={{
+  marginRight:'10px',
+  "&:hover": {backgroundColor: "orange", paddingLeft:'-20px' } }}
  >
 OUT OF STOCK
 </Button>
@@ -476,7 +479,7 @@ OUT OF STOCK
                    <Button 
                    variant='contained'
                    sx={{ "&:hover": { backgroundColor: "orange" } }} 
-                   color='warning'>
+                   color='success'>
                 ADD TO WISHLIST
                    </Button>
                

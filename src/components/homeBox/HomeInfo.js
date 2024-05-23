@@ -110,9 +110,14 @@ const HomeInfo = () => {
             <ProductCategory />
           </div>
         </CategoryBar>
+        <Phone>
+         
         <PhoneClass>
+       
           <CarouselItem products={phoneProducts} />
+         
         </PhoneClass>
+        </Phone>
         <BaseItems />
         <FooterLinks />
       </Contain>
@@ -122,10 +127,13 @@ const HomeInfo = () => {
 
 export default HomeInfo;
 
+const Phone  = styled.div`
 
+`
 const PhoneClass  = styled.div`
-background-color:darkgray;
 
+background-color:darkgray;
+width:100%;
 @media(max-width:768px){
     width: 100%;
   //height: 100%;
@@ -145,16 +153,16 @@ text-align:center !important;
 
 
   span{
-  font-size:18px;
+
   font-weight:400;
   color:green;
-   font-size:18px;
+   font-size:15px;
   
 
 
 }
 
-}
+} 
 
 
 `
@@ -174,9 +182,14 @@ const Container = styled.div`
    
 `
 const CategoryBar = styled.div`
+@media(max-width:768px){
+  width:100%;
+height:90vh !important;
+}
 background-color:#006666;
 width:100%;
 height:100%;
+//margin-bottom:-10px ;
 div{
   padding-top:3px ;
   span{

@@ -61,7 +61,7 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
           display: 'flex',
           flexDirection: grid ? 'column' : 'row',
           padding:'7px',
-          marginLeft: grid ? '0px' : '100px',
+         
         
         
           '@media (max-width: 768px)': {

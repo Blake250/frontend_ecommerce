@@ -66,10 +66,10 @@ useEffect(()=>{
 
 
 
-  const filterProductByCat = (cat) => {
+  const filterProductByCat = async(cat) => {
     if (cat !== null) {
       setCategory(cat);
-      dispatch(FILTER_BY_CAT({ products: products, category: cat }));
+  await    dispatch(FILTER_BY_CAT({ products: products, category: cat }));
     }
   };
 
@@ -101,7 +101,7 @@ useEffect(()=>{
 
   return (
     <Box
-
+      marginBottom={'50px'}
     >
 
 
@@ -152,7 +152,13 @@ useEffect(()=>{
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ width: 230, '@media(maxWidth:768px)': { width: 175 } }}>
+      <Box sx={{
+        // display:'flex',
+        // flexDirection:'column',
+        // justifyContent:'center',
+        // alignItems:'center',
+        width: 350, 
+        '@media(maxWidth:768px)': { width: 175 } }}>
 
       <Typography sx={{ my: 2, textAlign: 'center', fontWeight: '600', color: '#986d41' }}>
           Price

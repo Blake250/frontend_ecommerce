@@ -47,6 +47,8 @@ const Home = styled.div`
     position: relative; 
 
     @media (max-width:768px) {
+      width:80%;
+      height:80%;
       div{
       
       }
@@ -59,7 +61,7 @@ const Home = styled.div`
                 padding:7px 2px !important;
                 font-size:15px !important;
                 margin-top:3px !important;
-
+                   margin-left:7px !important;
                 &:hover {
     &:before {
      width: calc(100% - 18px) !important;
@@ -161,8 +163,8 @@ justify-content: space-between;
 }
         svg{
   padding: 0.5rem !important;
-  width: 1.5rem !important;
-  height: 1.5rem!important;
+  width: 1rem !important;
+  height: 1rem!important;
   margin: 2px !important;
   margin-left:0px;
         }

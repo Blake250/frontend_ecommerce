@@ -180,12 +180,7 @@ export default function Order() {
           <Pagination itemsPerPage={itemsPerPage} pageCount={pageCount} handlePageClick={handlePageClick} itemOffset={itemOffset} setItemOffset={setItemOffset} />
         </Box>
 
-      <Stack spacing={2} rowGap='35px' direction='row' sx={{ marginTop: '20px', flexDirection: 'column', '@media(max-width:768px)': { flexDirection: 'column' } }}>
-        <Stack spacing={2} sx={{ paddingLeft: '23px' }}>
-          <Button variant="outlined" sx={{ width: '150px' }}>Clear cart</Button>
-        </Stack>
-    
-      </Stack>
+      
 
    
     </Box>

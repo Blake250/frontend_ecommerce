@@ -153,6 +153,7 @@ justify-content: space-between;
   padding: 0 20px; 
   box-sizing: border-box;
 @media (max-width:768px)  {
+  padding: 0 5px !important; 
     div{
         height:90% !important;
         h2{

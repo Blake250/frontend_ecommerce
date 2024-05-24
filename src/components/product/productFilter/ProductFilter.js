@@ -153,12 +153,20 @@ useEffect(()=>{
         </FormControl>
       </Box>
       <Box sx={{
-        // display:'flex',
-        // flexDirection:'column',
-        // justifyContent:'center',
-        // alignItems:'center',
-        width: 350, 
-        '@media(maxWidth:768px)': { width: 175 } }}>
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center',
+        // width: 200, 
+        // //paddingLeft:'85px',
+        // '@media(maxWidth:768px)': { 
+        //   width: '175px !important',
+        //   paddingLeft:'-30px !important',
+
+        //  } 
+        
+        
+        }}>
 
       <Typography sx={{ my: 2, textAlign: 'center', fontWeight: '600', color: '#986d41' }}>
           Price
@@ -175,8 +183,8 @@ useEffect(()=>{
        onChange={handleChange}
     
      />
-     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-       <Typography variant="body2" onClick={() => setPrice([minPrice, maxPrice])} sx={{ cursor: 'pointer' }}>
+     <Box sx={{ display: 'flex', justifyContent: 'space-between',  }}>
+       <Typography variant="body2" onClick={() => setPrice([minPrice, maxPrice])} sx={{ cursor: 'pointer',paddingRight:'10px' }}>
          {minPrice } min
        </Typography>
        <Typography variant="body2" onClick={() => setPrice([maxPrice, maxPrice])} sx={{ cursor: 'pointer' }}>

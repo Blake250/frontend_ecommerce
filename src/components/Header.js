@@ -451,7 +451,7 @@ const cartData = (
        
          <>  
        <ShowOnLogOut> 
-       <NavLinkStyled to="/home" onClick={closeMenu}>
+       <NavLinkStyled to="/" onClick={closeMenu}>
         
         <span>Login</span>
            

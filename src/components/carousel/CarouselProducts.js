@@ -18,7 +18,9 @@ const CarouselProducts = ({ imageUrl, name, price, product, regularPrice, descri
 
   return (
     <Box sx={{ position: 'relative', width: '100%', backgroundColor: 'darkgray' }}>
-      <Box sx={{ marginTop:'0px',   width: '100%', '&:hover .hoverButton': { backgroundColor: '#a4852a', opacity: 1, transition: 'all 0.8s linear', zIndex: 999 } }}>
+      <Box  
+    sx={{
+       width: '100%', '&:hover .hoverButton': { backgroundColor: '#a4852a', opacity: 1, transition: 'all 0.8s linear', zIndex: 999 } }}>
         <PageHeading heading="Latest Product" btnText="Buy Now >>>" />
         <Link to={`/product-details/${product?._id}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ marginLeft: '5px', '@media(max-width:768px)': { width: '100% !important' } }}>

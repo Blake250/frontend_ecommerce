@@ -136,7 +136,7 @@ background-color:darkgray;
 width:100%;
 @media(max-width:768px){
     width: 100%;
-  //height: 100%;
+  height: auto;
   div{span{
     font-size:15px !important;
   }}
@@ -184,11 +184,14 @@ const Container = styled.div`
 const CategoryBar = styled.div`
 @media(max-width:768px){
   width:100%;
-height:90vh !important;
+  //height:30vh !important;
+// padding-top:60px;
+height:400px !important;
+max-height:410px !important;
 }
 background-color:#006666;
 width:100%;
-height:100%;
+height:100% !important;
 //margin-bottom:-10px ;
 div{
   padding-top:3px ;
@@ -196,7 +199,18 @@ div{
     font-weight:600;
    font-size:20px;
   }
-}
+};
+@media (max-width: 400px) {
+    width: 100%;
+    height: 500px!important;
+   // margin-bottom:-40vh !important;
+    div {
+      padding-top: 2px;
+      span {
+        font-size: 18px;
+      }
+    }
+  }
 
 
 `

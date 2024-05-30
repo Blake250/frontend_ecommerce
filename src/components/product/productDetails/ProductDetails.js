@@ -405,12 +405,26 @@ const ProductDetails = () => {
 onClick={()=> decreaseCart(product) }
 variant="outlined" 
 size="small"
+sx={{
+  '@media (max-width:768px)':{
+   display:'none'
+   
+}
+}}
 >-</Button>
   <Typography color='red' sx={{fontSize:'13px', fontWeight:'400'}} >{cart?.cartQuantity} </Typography>
 <Button
 onClick={()=> addToCart(product) }
  variant="outlined" 
- size="small">
+ size="small"
+ 
+ sx={{
+  '@media (max-width:768px)':{
+   display:'none'
+   
+}
+}}
+ >
   +
   </Button>
 

@@ -360,20 +360,6 @@ const logOutUser = (async()=>{
 })
 
 
-const cartData = (
-
-  <CartLink  to="/" >
-
-    <span>cart </span> 
-   <ShoppingCartOutlinedIcon fontSize='8px' />
-   <b style={{
-    fontSize:'12px',
-    verticalAlign:'top'
-  
-  }} >{0} </b>
-   </CartLink>
-
-)
 
 
 
@@ -547,6 +533,12 @@ const cartData = (
           <ShowOnLogin>  
           <NavLinkStyled to="/" onClick={logOutUser}>
             <span>LogOut</span>
+          </NavLinkStyled>
+          </ShowOnLogin>
+
+           <ShowOnLogin>
+          <NavLinkStyled to="/cart">
+            <span>{cart} </span>
           </NavLinkStyled>
           </ShowOnLogin>
         </div>

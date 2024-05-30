@@ -47,8 +47,8 @@ const Home = styled.div`
     position: relative; 
 
     @media (max-width:768px) {
-      width:80%;
-      height:80%;
+      width:70%;
+      height:70%;
       div{
       
       }
@@ -58,7 +58,7 @@ const Home = styled.div`
             a{
               white-space:nowrap;
                 font-weight:500 !important;
-                padding:7px 2px !important;
+                padding:7px 1px !important;
                 font-size:15px !important;
                 margin-top:3px !important;
                    margin-left:7px !important;

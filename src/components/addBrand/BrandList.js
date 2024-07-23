@@ -30,18 +30,10 @@ useEffect(()=>{
 },[dispatch])
 
 
-useEffect(()=>{
-  adjustContainerHeight()
-},[productCount, categories])
+// useEffect(()=>{
+//   adjustContainerHeight()
+// },[productCount, categories])
 
-const adjustContainerHeight = ()=>{
-  const container = document.getElementById("container")
-
-  if(container){
-    const count = categories ? categories?.length : 0
-    container.style.height = `${20 + count * 11}vh`
-  }
-}
 
 
 
@@ -90,7 +82,7 @@ const delBrand = (async(slug)=>{
   return (
     <>  
    {isLoading && <Loader/>}
-    <Container  id='container'>
+    <Container  >
      
         <Contain>
       <h3>All Brands</h3>
@@ -337,7 +329,7 @@ div{
 const Container = styled.div`
 width:100%;
 //height:170vh;
-padding-bottom:50px;
+padding-bottom:120px;
 
 
 padding-left:140px;

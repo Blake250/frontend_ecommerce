@@ -26,11 +26,11 @@ const HomeInfo = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const latest = products && products.filter((product) => product.quantity > 0).slice(0, 7);
+  const latest = products && products.filter((product) => product.quantity > 0).slice(0, 10);
   const latestPhones = products
     ?.filter((product) => product.quantity > 0)
     ?.slice(0, 8)
-    ?.filter((product) => product.price > 230);
+    ?.filter((product) => product.price > 100);
 
   const latestProducts = latest && latest.map((item) => {
     if (!item || Object.keys(item).length === 0) {
@@ -39,7 +39,9 @@ const HomeInfo = () => {
     }
 
     return (
-      <div key={item.id}>
+      <div
+     
+      key={item.id}>
         <CarouselProducts
           name={item.name}
           imageUrl={item.image[0]}
@@ -47,8 +49,9 @@ const HomeInfo = () => {
           price={item.price}
           description={item.description} 
           product={item}
+          
         />
-      </div>
+     </div>
     );
   });
 
@@ -101,6 +104,7 @@ const HomeInfo = () => {
             <NavLink to={"./footer"}> <h6>24/7 Support</h6> </NavLink>
           </SectionF>
         </HouseSections>
+        <Phone>
         <ProductStyle>
           <CarouselItem products={latestProducts} />
         </ProductStyle>
@@ -110,7 +114,7 @@ const HomeInfo = () => {
             <ProductCategory />
           </div>
         </CategoryBar>
-        <Phone>
+       
          
         <PhoneClass>
        
@@ -128,10 +132,10 @@ const HomeInfo = () => {
 export default HomeInfo;
 
 const Phone  = styled.div`
-
+height:100% !important;
 `
 const PhoneClass  = styled.div`
-
+height:100%!important;
 background-color:darkgray;
 width:100%;
 @media(max-width:768px){
@@ -157,7 +161,7 @@ text-align:center !important;
   font-weight:400;
   color:green;
    font-size:15px;
-  
+  text-align:'center';
 
 
 }
@@ -169,12 +173,12 @@ text-align:center !important;
 
 
 const ProductStyle = styled.div`
-
+height:100% !important;
 `
 const Container = styled.div`
 
    width:100%;
-  height:100%;
+  height:100% !important;
   border-top-right-radius:10px;
   border-top-left-radius:10px;
   //background-color:yellow;
@@ -203,7 +207,7 @@ div{
 @media (max-width: 400px) {
     width: 100%;
     height: 500px!important;
-   // margin-bottom:-40vh !important;
+  
     div {
       padding-top: 2px;
       span {

@@ -9,10 +9,6 @@ import { toast } from "react-toastify";
 
 
 
-
-
-
-
 // Async action creator for registration
 export const register = createAsyncThunk("auth/register", async (userData, { rejectWithValue }) => {
   try {

@@ -301,13 +301,15 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-   //   navigate("/home");
-   if(redirect === 'cart'){
+   //  navigate("/");
+   if(redirect === '/cart'){
     dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
     return  navigate("/cart");
    }
  
-   dispatch(getCart())
+  
+    dispatch(getCart())
+  
 
     }
   //

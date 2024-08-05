@@ -77,20 +77,20 @@ function App() {
           <Routes>
             {/* Public Routes */}
            
-            {<Route path="/" element={<Login />} />}
+            {<Route path="/login" element={<Login />} />}
             <Route path="/register" element={<Register />} />
             <Route path="/reset" element={<Reset />} />
             <Route path="/page" element={<PageMenu />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/view-products" element={<ViewProducts />} />
 
             <Route path="/product-details/:id" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/order-history" element={<Order/>} />
             <Route path="/order-details/:id" element={<OrderDetails />} />
             {/* Private Routes */}
         
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/order" element={<OrderPage />} />
               <Route path="/profile" element={<Profile />} />

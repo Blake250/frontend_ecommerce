@@ -53,7 +53,7 @@ const ErrorPage = () => {
         <Content>
           <Title>Page Not Found</Title>
           <Message>Looks Like The Page You Are Looking For Could Not Be Found</Message>
-          <BackButton  to={"/home"} >Back to Home</BackButton>
+          <BackButton  to={"/"} >Back to Home</BackButton>
         </Content>
       </Container>
     );

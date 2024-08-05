@@ -132,7 +132,7 @@ const [itemOffset, setItemOffset] = useState(0);
                   <TableData>{product.quantity}</TableData>
                   <ActionIcons>
 
-                    <Link to={"/home"} > 
+                    <Link to={"/"} > 
                     <AiOutlineEye color='blue' />
                     </Link>
                     <Link to={`/admin/edit-product/${product?._id}`} > 

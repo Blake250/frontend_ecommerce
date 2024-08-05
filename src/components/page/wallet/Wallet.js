@@ -29,7 +29,7 @@ const Wallet = () => {
 
 
     const backendURL = process.env.REACT_APP_BACKEND_URL
-    console.log(`there is ${backendURL}`)
+    //console.log(`there is ${backendURL}`)
     const publicKey = process.env.REACT_APP_FLW_PK 
     const tx_Ref = `blake_${uuidv4}`;
 
@@ -54,6 +54,8 @@ const Wallet = () => {
   const [depositData, setDepositData] = useState(initialDepositState)
   const {amount, sender, receiver, description, status} = transferData
 
+  //console.log(`amount deposited is ${amount}`)
+
 const {amount:depositAmount, paymentMethod} = depositData
  const [showDepositModal, setShowDepositModal] = useState(false)
   const dispatch= useDispatch()
@@ -62,13 +64,17 @@ const {amount:depositAmount, paymentMethod} = depositData
   const navigate = useNavigate()
   const [URLParams] = useSearchParams()
   const payment = URLParams.get('payment') || ''
+ 
 
   useEffect(()=>{
     if(payment === 'successful'){
+      //  const amountInCent= URLParams.get('amount') || ''
+      //  const amountInDollars = amountInCent / 100
         toast.success('Payment Successful')
+    //   toast.success(`$${amountInDollars} deposited into your account successfully`)
         setTimeout(()=>{
       navigate('/wallet')
-        }, 5000)
+        }, 10000)
     }
 
     if(payment === 'failed'){
@@ -148,7 +154,7 @@ const transferMoney = async()=>{
   }
 
   const formData = {
-    amount,
+    amount: amount,
     sender : user?.email,
     receiver,
     description,
@@ -171,14 +177,17 @@ const depositMoney = async (e)=>{
     if(paymentMethod === ''){
       return toast.error('Please Enter A Payment Method')
     }
+
+    console.log(`Deposit Amount: ${depositAmount}`);
   
     if(paymentMethod  === 'stripe'){
 axios.post(`${backendURL}/api/transaction/depositFundStripe`, {
-  amount:depositAmount
+  amount:depositAmount 
 }
 
 
 ).then((res)=>{
+  console.log('Response:', res.data);
   if(res.data.url){
     window.location.href = res.data.url
   }

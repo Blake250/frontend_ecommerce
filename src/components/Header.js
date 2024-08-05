@@ -354,7 +354,7 @@ const logOutUser = (async()=>{
 
  await dispatch(RESET_AUTH()) 
 
-    navigate("/") 
+    navigate("/login") 
 
  
 })
@@ -392,7 +392,7 @@ const logOutUser = (async()=>{
       {  isLoggedIn ?
        (
         
-        <LogoLink to={"/home"}  className="btn">
+        <LogoLink to={"/"}  className="btn">
           <span>E-SHOP!</span>
         </LogoLink>
 
@@ -477,7 +477,7 @@ const logOutUser = (async()=>{
           </ShowOnLogin>
           <ShowOnLogin> 
  
-              <NavLinkStyled  to="/" onClick={logOutUser}>
+              <NavLinkStyled  to="/login" onClick={logOutUser}>
             <span>LogOut</span>
           </NavLinkStyled> 
  
@@ -503,14 +503,14 @@ const logOutUser = (async()=>{
       <MenuExternalContainer showMenu={cshowMenu} onClick={toggleMenu}>
         <div>
           <ShowOnLogin> 
-          <LogoLink to="/home" className="btn">
+          <LogoLink to="/" className="btn">
             <span>ESHOP.</span>
           </LogoLink>
 
           <NavLinkStyled to="/shop" onClick={closeMenu}>
             <span>Shop </span>
           </NavLinkStyled>
-          <NavLinkStyled to="/home" onClick={closeMenu}>
+          <NavLinkStyled to="/" onClick={closeMenu}>
             <span>Home</span>
           </NavLinkStyled>
          
@@ -526,12 +526,12 @@ const logOutUser = (async()=>{
           
           </ShowOnLogOut>
             <ShowOnLogOut> 
-          <NavLinkStyled to="/home" onClick={closeMenu}>
+          <NavLinkStyled to="/" onClick={closeMenu}>
             <span>Login</span>
           </NavLinkStyled>
           </ShowOnLogOut>
           <ShowOnLogin>  
-          <NavLinkStyled to="/" onClick={logOutUser}>
+          <NavLinkStyled to="/login" onClick={logOutUser}>
             <span>LogOut</span>
           </NavLinkStyled>
           </ShowOnLogin>

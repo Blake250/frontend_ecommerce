@@ -388,7 +388,7 @@ const logOutUser = (async()=>{
   return (
     <HeaderContainer>
       { isLoading &&   <Loader/>}
-      <HeaderContent className={scrollPage ? "fixed" : "" }  >
+      <HeaderContent  /*className={scrollPage ? "fixed" : "" }/* >
       {  isLoggedIn ?
        (
         

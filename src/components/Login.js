@@ -316,11 +316,7 @@ const Login = () => {
 
   // }, [dispatch, isLoggedIn, navigate, redirect]);
 
-useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getCart());
-    }
-  }, [isLoggedIn, dispatch]);
+
 
 
     useEffect(() => {
@@ -332,6 +328,13 @@ useEffect(() => {
       navigate('/');
     }
   }, [isLoggedIn, cartItems, navigate]);
+
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getCart());
+    }
+  }, [isLoggedIn, dispatch]);
   
 
 const loginUser = ( async (e)=>{

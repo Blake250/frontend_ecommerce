@@ -294,28 +294,40 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [urlParams] =useSearchParams()
-  console.log(`her is my ${urlParams}`)
-  const redirect = urlParams.get('redirect')
+  // const [urlParams] =useSearchParams()
+  // console.log(`her is my ${urlParams}`)
+  // const redirect = urlParams.get('redirect')
 
 
-  useEffect(() => {
-    if (isLoggedIn) {
-   //  navigate("/");
-   if(redirect === 'cart'){
-    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
-    return  navigate("/cart");
-   }
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //  //  navigate("/");
+  //  if(redirect === 'cart'){
+  //   dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+  //   return  navigate("/cart");
+  //  }
  
   
-    dispatch(getCart())
+  //   dispatch(getCart())
   
 
-    }
-  //
+  //   }
+  // //
 
-    
-  }, [dispatch, isLoggedIn, navigate, redirect]);
+  // }, [dispatch, isLoggedIn, navigate, redirect]);
+
+
+
+    useEffect(() => {
+    console.log("isLoggedIn:", isLoggedIn);
+    console.log("cartItems:", cartItems);
+    if (isLoggedIn && cartItems?.length > 0) {
+      navigate('/cart');
+    } else if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, cartItems, navigate]);
+  
 
 const loginUser = ( async (e)=>{
   e.preventDefault()

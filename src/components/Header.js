@@ -531,7 +531,7 @@ const logOutUser = (async()=>{
           </NavLinkStyled>
           </ShowOnLogOut>
           <ShowOnLogin>  
-          <NavLinkStyled to="/login" onClick={logOutUser}>
+          <NavLinkStyled  onClick={logOutUser}>
             <span>LogOut</span>
           </NavLinkStyled>
           </ShowOnLogin>

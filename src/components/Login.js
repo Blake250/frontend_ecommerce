@@ -316,6 +316,11 @@ const Login = () => {
 
   // }, [dispatch, isLoggedIn, navigate, redirect]);
 
+useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getCart());
+    }
+  }, [isLoggedIn, dispatch]);
 
 
     useEffect(() => {

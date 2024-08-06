@@ -302,7 +302,7 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn) {
    //  navigate("/");
-   if(redirect === '/cart'){
+   if(redirect === 'cart'){
     dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
     return  navigate("/cart");
    }

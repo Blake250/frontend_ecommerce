@@ -26,18 +26,18 @@ useEffect(()=>{
 },[dispatch])
 
 
-useEffect(()=>{
- adjustContainerHeight()
-},[[productCount, coupons]])
+// useEffect(()=>{
+//  adjustContainerHeight()
+// },[[productCount, coupons]])
 
-const adjustContainerHeight = ()=>{
- const container = document.getElementById("container")
+// const adjustContainerHeight = ()=>{
+//  const container = document.getElementById("container")
 
- if(container){
-   const count = coupons ? coupons?.length : 0
-   container.style.height = `${20 + count * 20}vh`
- }
-}
+//  if(container){
+//    const count = coupons ? coupons?.length : 0
+//    container.style.height = `${20 + count * 20}vh`
+//  }
+// }
 
 
 
@@ -93,7 +93,7 @@ const spanText5 = "Actions"
 
 return (
 
-  <Container id='container'    >
+  <Container    >
     {isLoading && <Loader/>}
       <Contain >
     <h3>All Coupons</h3>
@@ -413,6 +413,7 @@ const Container = styled.div`
 
 
 height:100%;
+padding-bottom:50px;
 div{
 
 

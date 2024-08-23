@@ -29,6 +29,8 @@ import Order from './pages/userOrder/Order';
 import CheckoutWithFW from './components/checkOut/CheckoutWithFW';
 import CheckoutPayPal from './components/checkOut/CheckoutPayPal';
 import Wallet from './components/page/wallet/Wallet';
+import CheckoutWallet from './components/checkOut/checkout/CheckoutWallet';
+import Wishlist from './components/page/wishlist/Wishlist';
 
 const AppContainer = styled.div`
   position: relative;
@@ -36,7 +38,7 @@ const AppContainer = styled.div`
 const HeaderContainer = styled.div`
   position: sticky;
   width: 100%;
-  z-index: 2;
+  z-index: 999;
 `;
 
 const FooterContainer = styled.div`
@@ -99,7 +101,9 @@ function App() {
               <Route path="/checkout-stripe" element={<Checkout/>} />
               <Route path="/checkout-wave" element={<CheckoutWithFW/>} />
               <Route path="/checkout-paypal" element={<CheckoutPayPal/>} />
+              <Route path="/checkout-wallet" element={<CheckoutWallet/>} />
               <Route path="/wallet" element={<Wallet/>} />
+              <Route path="/wishlist" element={<Wishlist/>} />
            
              
              
@@ -110,9 +114,6 @@ function App() {
                 
                 } />
               
-            
-         
-           
 
             <Route path="/*" element={<ErrorPage />} />
           </Routes>

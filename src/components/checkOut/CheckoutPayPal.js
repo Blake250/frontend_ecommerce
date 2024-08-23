@@ -103,12 +103,15 @@ sx={{
       item xs={12} md={6}  >
         <Paper sx={{
               marginLeft:'10px' ,
-             // zIndex:-999 
+             // zIndex:-999 ,
+          //  position:'relative',
           
         }} elevation={0}>
           <Stack   spacing={3} sx={{ 
             padding: '10px',
-          // position:'relative'
+           position:'relative',
+           
+       
         
         }}>
             <h3
@@ -121,6 +124,9 @@ sx={{
             }}
             >Pay Pal CheckOut</h3>
               <PayPalButtons
+              sx={{
+                zIndex:3 ,
+              }}
               createOrder ={
                 (data, actions)=>{
                return actions.order.create({

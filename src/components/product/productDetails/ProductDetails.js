@@ -28,6 +28,7 @@ import {
   ListItemButton,
   
 } from '@mui/material';
+import { addToWishlist } from '../../../redux/slice/authSlice';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -61,6 +62,15 @@ const ProductDetails = () => {
   const decreaseCart = (product)=>{
     dispatch(DECREASE_CART(product))
     dispatch(saveCartDB({cartItems: JSON.parse(localStorage.getItem('cartItems')) }))
+  }
+
+
+  const aDDToWishList = async()=>{
+    const productData = {
+      productID: product._id
+    }
+
+    await dispatch(addToWishlist(productData)  )
   }
 
   useEffect(() => {
@@ -124,7 +134,15 @@ const ProductDetails = () => {
       </Stack>
       <Grid  container  spacing={3}>
         <Grid  item xs={12} sm={6}>
-          <Card>
+          <Card
+          
+          
+          sx={{
+              
+          }
+      
+          }
+          >
             <CardMedia
               component="img"
               image={product?.image[imageIndex] }
@@ -135,15 +153,23 @@ const ProductDetails = () => {
                 objectFit: 'cover',
                 height: '75vh',
                 minHeight: 300,
+              //  margin: '8px',
                 '@media(max-width:768px)': {
                   height: '80vh!important',
                 }
               }}
             />
-            <Stack sx={{
+            <Stack 
+        
+            sx={{
                display: 'flex',
              flexDirection: 'row' ,
-
+          
+      //       // paddingBottom: '16px !important',
+      //       flexWrap: 'wrap', // Ensure images wrap to the next line if needed
+      // gap: '8px !important', // Add spacing between images
+      // paddingBottom: '16px', // Add padding at the bottom of the stack
+            
 
                
                   }}>
@@ -155,6 +181,7 @@ const ProductDetails = () => {
                   onClick={() => setImageIndex(index)}
                   width="100px"
                   height="100px"
+                  
                 //  className={`${styles.pImg}`}
                  
 
@@ -162,6 +189,8 @@ const ProductDetails = () => {
                     borderRadius: '3px',
                     margin: '8px',
                     animation: 'slide 0.5s forwards',
+                  //  marginBottom: '16px',
+                  
 
                     border: imageIndex === index ? '2px solid red' : 'none'
                   }}
@@ -491,6 +520,7 @@ OUT OF STOCK
 
                       <Typography >
                    <Button 
+                   onClick={ ()=> aDDToWishList(product)}
                    variant='contained'
                    sx={{ "&:hover": { backgroundColor: "orange" } }} 
                    color='success'>
@@ -538,725 +568,6 @@ OUT OF STOCK
 };
 
 export default ProductDetails;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import { getSingleProduct } from '../../../feature/product/productSlice';
-import Loader from '../../Loader';
-import { toast } from 'react-toastify';
-import DOMPurify from 'dompurify';
-
-
-
-import { 
-  Card, 
-  CardMedia,
-  Typography,
-  Button, 
-  Grid,
-  Paper,
-  Box,
-  Divider,
-  Stack,
-  List, ListItem, ListItemText,ListItemButton
-} from '@mui/material';
-
-const ProductDetails = () => {
-  const { id } = useParams();
-  const { isLoading, product } = useSelector((state) => state?.product);
-  const [imageIndex, setImageIndex] = useState(0);
-  const dispatch = useDispatch();
-
-
-
-  useEffect(() => {
-    const slideLength = product?.image?.length || 0;
-    let slideInterval;
-  
-    if (slideLength > 1) {
-      slideInterval = setInterval(() => {
-        const nextIndex = imageIndex === slideLength - 1 ? 0 : imageIndex + 1;
-        setImageIndex(nextIndex);
-      }, 3000);
-    }
-  
-    return () => clearInterval(slideInterval);
-  }, [imageIndex, product]);
-  
-
-
-
-
-  useEffect(() => {
-    if (id !== 0) {
-      dispatch(getSingleProduct(id));
-    } else {
-      toast.error(`Invalid product ID: ${id}`);
-    }
-  }, [dispatch, id]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  // If product is not loaded yet or doesn't exist, display a message
-  if (!product) {
-    return <Typography variant="h5">Product not found</Typography>;
-  }
-
-
-
-  const style = {
-    p: 0,
-    width: '98%',
-   // maxWidth: 360,
-    borderRadius: 2,
-    border: '1px solid',
-    borderColor: 'divider',
-    backgroundColor: 'background.paper',
-  };
-  
-
-  
-  
-
-
-  
-  return (
-    <Box sx={{ padding: '8px',
-    marginBottom: '40px' ,
-
-
- }}  width="100%"   >
-      <Grid container
-       height='150vh'
-     
-        spacing={2}
-        sx={{ 
-              '@media(max-width:768px) ':{
-               height:'300vh!important',
-              }    
-             }}
-    
-        >
-        <Grid item xs={12} sm={6}>
-          <Card>
-            <CardMedia
-              component="img"
-              image={product?.image[imageIndex]}
-              alt={product?.name}
-              sx={{
-                width: '100%',
-                objectFit: 'cover',
-                height:'75vh',
-                minHeight: 300,
-                '@media(max-width:768px) ':{
-                  height:'100vh!important',
-                }    
-              }}
-            />
-          
-            
-          <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
-              {product?.image && product?.image?.length > 1 && product?.image?.map((img, index) => (
-              
-                <CardMedia
-                  key={index}
-                  component="img"
-                  image={img}
-                  onClick={() => setImageIndex(index)}
-                  width="100px"
-                  height="100px"
-                  
-                  sx={{
-                    borderRadius: '3px',
-                    margin: '8px',
-                 
-                    border: imageIndex === index ? '2px solid red' : 'none'
-                  
-                  }}
-                />
-                
-              ))}
-            </Stack>
-          
-          </Card>
-        </Grid>
-    
-  
-       
-        <Grid
-      sx={{
-    
-    
-    }}
-     item xs={12} sm={6}
-        >
-          <Stack>
-            <Paper>
-            <List sx={style} aria-label="mailbox folders">
-      <ListItem>
-        <ListItemText primary="Inbox" />
-      </ListItem>
-      <Divider  component="li" />
-      <ListItem>
-        <ListItemText primary="Drafts" />
-      </ListItem>
-      <Divider component="li" />
-      <ListItem>
-        <ListItemText primary="Trash" />
-      </ListItem>
-      <Divider component="li" />
-      <ListItem>
-        <ListItemText primary="Spam" />
-      </ListItem>
-    </List>
-
-            </Paper>
-          </Stack>
-       
-          </Grid>
-
-
-        <Grid width='100%' //height='100%'
-         item xs={12} sm={6}>
-          <Stack>
-          
-           
-
-          
-          <Paper elevation={3} style={{ padding: 20 }}>
-            <Typography  sx={{
-              textAlign:'center',
-            }}  variant="h5" gutterBottom>{product?.name}</Typography>
-            <Typography  sx={{textAlign:'center'}} variant="subtitle1" color="textSecondary" gutterBottom>{product?.category}</Typography>
-           
-            <Typography  sx={{
-              color:'#800000' ,
-              width:'95%',
-              fontWeight:'600',
-              fontStyle:'italic,',
-            
-            }} dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(product?.description)  }}  />
-           <Stack sx={{justifyContent:'center', flexDirection:'column', }} >
-           <Typography  sx={{
-              color:'#800000' ,
-            // textAlign:'center',
-            
-              fontWeight:'400',
-               }}>    </Typography>
-               <Box  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',   mt: 2,  }}>
-               <Typography variant="h6" sx={{color:'blue', fontWeight:'600', }} gutterBottom>Price: ${product?.price}</Typography>
-               <Button variant="contained" color="primary">Add to Cart</Button>
-               <Link style={{
-                textDecoration:'none',
-                marginTop: '8px' 
-               }}  to='/shop' >
-             &larr;Back To Home
-               </Link>
-             </Box>
-           </Stack>
-          </Paper>
-          </Stack>
-        </Grid>
-       
-      </Grid>
-    </Box>
-  );
-};
-
-export default ProductDetails;*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import { getSingleProduct } from '../../../feature/product/productSlice';
-import Loader from '../../Loader';
-import { toast } from 'react-toastify';
-import DOMPurify from 'dompurify';
-
-import { 
-  Card, 
-  CardMedia,
-  Typography,
-  Button, 
-  Grid,
-  Paper,
-  Box,
-  Divider,
-  Stack,
-  List, 
-  ListItem, 
-  ListItemText
-} from '@mui/material';
-
-const ProductDetails = () => {
-  const { id } = useParams();
-  const { isLoading, product } = useSelector((state) => state?.product);
-  const [imageIndex, setImageIndex] = useState(0);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const slideLength = product?.image?.length || 0;
-    let slideInterval;
-  
-    if (slideLength > 1) {
-      slideInterval = setInterval(() => {
-        const nextIndex = imageIndex === slideLength - 1 ? 0 : imageIndex + 1;
-        setImageIndex(nextIndex);
-      }, 3000);
-    }
-  
-    return () => clearInterval(slideInterval);
-  }, [imageIndex, product]);
-
-  useEffect(() => {
-    if (id !== 0) {
-      dispatch(getSingleProduct(id));
-    } else {
-      toast.error(`Invalid product ID: ${id}`);
-    }
-  }, [dispatch, id]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  // If product is not loaded yet or doesn't exist, display a message
-  if (!product) {
-    return <Typography variant="h5">Product not found</Typography>;
-  }
-
-  return (
-    <Box sx={{ padding: '8px', marginBottom: '40px' }} width="100%">
-      <Grid     container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <Card>
-            <CardMedia
-              component="img"
-              image={product?.image[imageIndex]}
-              alt={product?.name}
-              sx={{
-                width: '100%',
-                objectFit: 'cover',
-                height: '75vh',
-                minHeight: 300,
-                '@media(max-width:768px)': {
-                  height: '100vh!important',
-                }
-              }}
-            />
-            <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
-              {product?.image && product?.image?.length > 1 && product?.image?.map((img, index) => (
-                <CardMedia
-                  key={index}
-                  component="img"
-                  image={img}
-                  onClick={() => setImageIndex(index)}
-                  width="100px"
-                  height="100px"
-                  sx={{
-                    borderRadius: '3px',
-                    margin: '8px',
-                    border: imageIndex === index ? '2px solid red' : 'none'
-                  }}
-                />
-              ))}
-            </Stack>
-          </Card>
-        </Grid>
-    
-        <Grid  item xs={12} sm={6}  >
-          <Paper sx={{ padding: 2, height:'30%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <List sx={{ p: 0 }}>
-              <ListItem>
-                <ListItemText primary="Inbox" />
-              </ListItem>
-              <Divider component="li" />
-              <ListItem>
-                <ListItemText primary="Drafts" />
-              </ListItem>
-              <Divider component="li" />
-              <ListItem>
-                <ListItemText primary="Trash" />
-              </ListItem>
-              <Divider component="li" />
-              <ListItem>
-                <ListItemText primary="Spam" />
-              </ListItem>
-            </List>
-
-            <Stack  sx={{marginTop:'60px', }} >
-               <Paper>
-              <Typography variant="h5" gutterBottom>{product?.name}</Typography>
-              <Typography variant="subtitle1" color="textSecondary" gutterBottom>{product?.category}</Typography>
-              <Typography sx={{ color: '#800000', width: '95%', fontWeight: '600', fontStyle: 'italic' }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product?.description) }} />
-              <Stack sx={{ justifyContent: 'center', flexDirection: 'column' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-                  <Typography variant="h6" sx={{ color: 'blue', fontWeight: '600' }} gutterBottom>Price: ${product?.price}</Typography>
-                  <Button variant="contained" color="primary">Add to Cart</Button>
-                  <Link style={{ textDecoration: 'none', marginTop: '8px' }} to='/shop'> &larr; Back To Home </Link>
-                </Box>
-              </Stack>
-              </Paper>
-                 
-      
-      </Stack>
-      
-         
-
-
-
-          </Paper>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-};
-
-export default ProductDetails;*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import { getSingleProduct } from '../../../feature/product/productSlice';
-import Loader from '../../Loader';
-import { toast } from 'react-toastify';
-import DOMPurify from 'dompurify';
-
-
-
-import { 
-  Card, 
-  CardMedia,
-  Typography,
-  Button, 
-  Grid,
-  Paper,
-  Box,
-  Divider,
-  Stack,
-  List, ListItem, ListItemText,ListItemButton
-} from '@mui/material';
-
-const ProductDetails = () => {
-  const { id } = useParams();
-  const { isLoading, product } = useSelector((state) => state?.product);
-  const [imageIndex, setImageIndex] = useState(0);
-  const dispatch = useDispatch();
-
-
-
-  useEffect(() => {
-    const slideLength = product?.image?.length || 0;
-    let slideInterval;
-  
-    if (slideLength > 1) {
-      slideInterval = setInterval(() => {
-        const nextIndex = imageIndex === slideLength - 1 ? 0 : imageIndex + 1;
-        setImageIndex(nextIndex);
-      }, 3000);
-    }
-  
-    return () => clearInterval(slideInterval);
-  }, [imageIndex, product]);
-  
-
-
-
-
-  useEffect(() => {
-    if (id !== 0) {
-      dispatch(getSingleProduct(id));
-    } else {
-      toast.error(`Invalid product ID: ${id}`);
-    }
-  }, [dispatch, id]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  // If product is not loaded yet or doesn't exist, display a message
-  if (!product) {
-    return <Typography variant="h5">Product not found</Typography>;
-  }
-
-
-
-  const style = {
-    p: 0,
-    width: '98%',
-   // maxWidth: 360,
-    borderRadius: 2,
-    border: '1px solid',
-    borderColor: 'divider',
-    backgroundColor: 'background.paper',
-  };
-  
-
-  
-  
-
-
-  
-  return (
-    <Box sx={{ padding: '8px',
-    marginBottom: '40px' ,
-
-
- }}  width="100%"   >
-      <Grid container
-       height='150vh'
-     
-        spacing={2}
-        sx={{ 
-              '@media(max-width:768px) ':{
-               height:'300vh!important',
-              }    
-             }}
-    
-        >
-        <Grid item xs={12} sm={6}>
-          <Card>
-            <CardMedia
-              component="img"
-              image={product?.image[imageIndex]}
-              alt={product?.name}
-              sx={{
-                width: '100%',
-                objectFit: 'cover',
-                height:'75vh',
-                minHeight: 300,
-                '@media(max-width:768px) ':{
-                  height:'100vh!important',
-                }    
-              }}
-            />
-          
-            
-          <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
-              {product?.image && product?.image?.length > 1 && product?.image?.map((img, index) => (
-              
-                <CardMedia
-                  key={index}
-                  component="img"
-                  image={img}
-                  onClick={() => setImageIndex(index)}
-                  width="100px"
-                  height="100px"
-                  
-                  sx={{
-                    borderRadius: '3px',
-                    margin: '8px',
-                 
-                    border: imageIndex === index ? '2px solid red' : 'none'
-                  
-                  }}
-                />
-                
-              ))}
-            </Stack>
-          
-          </Card>
-        </Grid>
-    
-  
-       
-        <Grid
-      sx={{
-    
-    
-    }}
-     item xs={12} sm={6}
-        >
-          <Stack>
-            <Paper>
-            <List sx={style} aria-label="mailbox folders">
-      <ListItem>
-        <ListItemText primary="Inbox" />
-      </ListItem>
-      <Divider  component="li" />
-      <ListItem>
-        <ListItemText primary="Drafts" />
-      </ListItem>
-      <Divider component="li" />
-      <ListItem>
-        <ListItemText primary="Trash" />
-      </ListItem>
-      <Divider component="li" />
-      <ListItem>
-        <ListItemText primary="Spam" />
-      </ListItem>
-    </List>
-
-            </Paper>
-          </Stack>
-       
-          </Grid>
-
-
-        <Grid width='100%' //height='100%'
-         item xs={12} sm={6}>
-          <Stack>
-          
-           
-
-          
-          <Paper elevation={3} style={{ padding: 20 }}>
-            <Typography  sx={{
-              textAlign:'center',
-            }}  variant="h5" gutterBottom>{product?.name}</Typography>
-            <Typography  sx={{textAlign:'center'}} variant="subtitle1" color="textSecondary" gutterBottom>{product?.category}</Typography>
-           
-            <Typography  sx={{
-              color:'#800000' ,
-              width:'95%',
-              fontWeight:'600',
-              fontStyle:'italic,',
-            
-            }} dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(product?.description)  }}  />
-           <Stack sx={{justifyContent:'center', flexDirection:'column', }} >
-           <Typography  sx={{
-              color:'#800000' ,
-            // textAlign:'center',
-            
-              fontWeight:'400',
-               }}>    </Typography>
-               <Box  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',   mt: 2,  }}>
-               <Typography variant="h6" sx={{color:'blue', fontWeight:'600', }} gutterBottom>Price: ${product?.price}</Typography>
-               <Button variant="contained" color="primary">Add to Cart</Button>
-               <Link style={{
-                textDecoration:'none',
-                marginTop: '8px' 
-               }}  to='/shop' >
-             &larr;Back To Home
-               </Link>
-             </Box>
-           </Stack>
-          </Paper>
-          </Stack>
-        </Grid>
-       
-      </Grid>
-    </Box>
-  );
-};
-
-export default ProductDetails;*/
-
-
-
-
-
-
-
-
-
 
 
 

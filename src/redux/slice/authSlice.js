@@ -118,6 +118,53 @@ export const updatePhoto = createAsyncThunk("auth/updatePhoto", async (userData,
 });
 
 
+//add To wishlist
+export const addToWishlist = createAsyncThunk("auth/addToWishlist", async (productData, { rejectWithValue }) => {
+  try {
+    return await authService.addToWishlist(productData);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    console.log(message);
+    return rejectWithValue(message);
+  }
+});
+
+
+
+//get wishlist
+export const getWishList = createAsyncThunk("auth/getWishList", async (_, { rejectWithValue }) => {
+  try {
+    return await authService.getWishList();
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    console.log(message);
+    return rejectWithValue(message);
+  }
+});
+
+
+
+//remove  From  wishlist
+export const removeFromWishList = createAsyncThunk("auth/wishlist", async (productID, { rejectWithValue }) => {
+  try {
+    return await authService.removeFromWishList(productID);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    console.log(message);
+    return rejectWithValue(message);
+  }
+});
+
+
 
 
 
@@ -131,7 +178,8 @@ const initialState = {
   isError: false,
   isLoading: false,
   isSuccess: false,
-  message: ""
+  message: "",
+ wishlist : []
 };
 
 // Auth slice
@@ -186,7 +234,9 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = action.payload;
+     //   state.cartItems = action.payload.cartItems
         toast.success("Login is Successful!");
+        console.log(action.payload)
      
       })
       .addCase(login.rejected, (state, action) => {
@@ -309,6 +359,86 @@ const authSlice = createSlice({
               toast.error(action.payload);
            
             })
+
+
+             // Add to wishlist
+
+             .addCase(addToWishlist.pending, (state) => {
+              state.isLoading = true;
+            })
+            .addCase(addToWishlist.fulfilled, (state, action) => {
+              state.isLoading = false;
+              state.isSuccess = true;
+             
+              state.message = action.payload.message
+              toast.success(action.payload.message)
+              console.log(action.payload);
+          
+              
+            })
+            .addCase(addToWishlist.rejected, (state, action) => {
+              state.isLoading = false;
+              state.isError = true;
+              state.message = action.payload; 
+              toast.error(action.payload);
+              console.log(action.payload);
+           
+            })
+
+
+                    // get wishlist
+
+                    .addCase(getWishList.pending, (state) => {
+                      state.isLoading = true;
+                    })
+                    .addCase(getWishList.fulfilled, (state, action) => {
+                      state.isLoading = false;
+                      state.isSuccess = true;
+                     
+                     // state.wishlist = action.payload.wishlist
+                     state.wishlist = Array.isArray(action.payload.wishlist) ? action.payload.wishlist : []
+
+                      toast.success(action.payload)
+                    //  console.log(action.payload);
+                  
+                      
+                    })
+                    .addCase(getWishList.rejected, (state, action) => {
+                      state.isLoading = false;
+                      state.isError = true;
+                      state.message = action.payload; 
+                       toast.error(action.payload);
+                       console.log(action.payload);
+                   
+                    })
+
+
+              // remove  from wishlist
+
+             .addCase(removeFromWishList.pending, (state) => {
+              state.isLoading = true;
+            })
+            .addCase(removeFromWishList.fulfilled, (state, action) => {
+              state.isLoading = false;
+              state.isSuccess = true;
+             
+              state.message = action.payload.message
+              toast.success(action.payload.message)
+              //console.log(action.payload);
+          
+              
+            })
+            .addCase(removeFromWishList.rejected, (state, action) => {
+              state.isLoading = false;
+              state.isError = true;
+              state.message = action.payload; 
+              toast.error(action.payload);
+              console.log(action.payload);
+           
+            })
+
+        
+
 
 
 

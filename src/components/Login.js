@@ -11,9 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { validateEmail } from './utils';
 import { login } from '../redux/slice/authSlice';
 import {  useDispatch, useSelector } from 'react-redux';
-import { getCart } from '../feature/cart/cartSlice';
+import  { getCart, saveCartDB } from '../feature/cart/cartSlice';
 import { useSearchParams } from 'react-router-dom';
-import { saveCartDB } from '../feature/cart/cartSlice';
+
+
+
 
 
 const Container = styled.div`
@@ -290,21 +292,24 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   //const [isLoading, setIsLoading] = useState(false)
-  const {isLoading, isLoggedIn, isSuccess }= useSelector((state)=> state?.auth)
+  const {cartItems, isLoading, isLoggedIn, isSuccess, error }= useSelector((state)=> state?.auth)
+  //const { cartItems, cartTotalQuantity, cartTotalAmount, error } = useSelector((state) => state?.auth);
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [urlParams] =useSearchParams()
   console.log(`her is my ${urlParams}`)
-  const redirect = urlParams.get('redirect')
+  const redirect = urlParams.get('redirect') || ""
 
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn ) {
    //  navigate("/");
    if(redirect === 'cart'){
     dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
     return  navigate("/cart");
+  // return navigate('/login?redirect=cart');
+
    }
  
   
@@ -312,12 +317,30 @@ const Login = () => {
   
 
     }
-  //
 
-    
-  }, [dispatch, isLoggedIn, navigate, redirect]);
+
+  
+ }, [dispatch, isLoggedIn, navigate, redirect]);
+
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getCart());
+    }
+  }, [isLoggedIn, dispatch]);
+
+  
 
 const loginUser = ( async (e)=>{
+
   e.preventDefault()
   if(!email  && !password){
     return toast.error("Please Enter a Valid Email and Password")
@@ -336,6 +359,10 @@ await dispatch(login(userData))
 
 
 })
+
+
+
+
 
 
 

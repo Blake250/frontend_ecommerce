@@ -24,9 +24,9 @@ headers.append('Authorization', 'Basic ' );*/
         const response = await  axios.post( `${API_URL}register`,userData, 
         {
           
-          withCredentials : true,
+      withCredentials : true,
     
-      headers: {'Content-Type': 'application/json'}   
+    headers: {'Content-Type': 'application/json'}   
     
     
         }) 
@@ -109,6 +109,42 @@ const getUser = (async()=>{
     })
 
 
+// add to wishlist
+const addToWishlist = (async(productData)=>{
+  const response = await axios.post(`${API_URL}addToWishlist`, productData,{
+   withCredentials:true,
+   headers:{'Content-Type' : 'application/json'}
+
+  })
+  console.log("API Response:", response.data); 
+  return response.data
+
+})
+
+
+// get all wishlist
+const getWishList = (async()=>{
+  const response = await axios.get(`${API_URL}getWishList`,{
+    withCredentials: true,
+   headers : {'Content-Type' : 'application/json'}
+  })
+  return response.data
+})
+
+
+// remove from wishlist
+const removeFromWishList = (async(productID)=>{
+const response = await axios.put(`${API_URL}wishlist/${productID}`,{
+  withCredentials: true,
+  headers: {'Content-Type' : 'application/json'}
+})
+return response.data
+})
+
+
+
+
+
 
  const authService= {
    register,
@@ -117,7 +153,10 @@ const getUser = (async()=>{
    getLoginStatus,
    getUser,
    updateUser,
-   updatePhoto
+   updatePhoto,
+   addToWishlist,
+   getWishList,
+   removeFromWishList
 
     }
 

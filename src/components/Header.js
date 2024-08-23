@@ -35,9 +35,8 @@ const HeaderContainer = styled.div`
   padding:0;
   margin:0;
 
-
  
- // z-index: 4 !important;
+  //z-index: 1000 !important;
 
 `;
 
@@ -45,6 +44,7 @@ const HeaderContainer = styled.div`
 
 
 const HeaderContent = styled.div`
+ //z-index: 10001 !important;
   display: flex;
   justify-content: space-between;
   align-items: center !important;
@@ -53,6 +53,8 @@ const HeaderContent = styled.div`
  // padding: 25px 0px;
   //padding-bottom:16px;
   position:relative;
+  //z-index: 4 !important;
+
 
   &.no-scroll{
     width: 100%;
@@ -388,7 +390,7 @@ const logOutUser = (async()=>{
   return (
     <HeaderContainer>
       { isLoading &&   <Loader/>}
-      <HeaderContent className={scrollPage ? "fixed" : "" }  >
+      <HeaderContent /*className={scrollPage ? "fixed" : "" } */ >
       {  isLoggedIn ?
        (
         

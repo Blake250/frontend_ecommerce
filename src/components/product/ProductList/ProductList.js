@@ -120,7 +120,7 @@ const [itemOffset, setItemOffset] = useState(0);
         <div className="icons">
           <BsFill0CircleFill 
           size={22}
-           color='orangered'
+           color='orange'
            onClick={()=> setGrid(true)}
            />
 

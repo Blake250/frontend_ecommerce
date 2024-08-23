@@ -61,9 +61,14 @@ const {amount:depositAmount, paymentMethod} = depositData
   const dispatch= useDispatch()
 
 
-  const navigate = useNavigate()
-  const [URLParams] = useSearchParams()
+  
+
+
+
+ const navigate = useNavigate()
+   const [URLParams] = useSearchParams()
   const payment = URLParams.get('payment') || ''
+
  
 
   useEffect(()=>{
@@ -81,6 +86,25 @@ const {amount:depositAmount, paymentMethod} = depositData
         return toast.error('Payment Failed Try Again')
     }
 },[payment, navigate])
+
+// useEffect(() => {
+//   if (payment === 'successful') {
+//     const amountInCent = URLParams.get('amount') || '';
+//     const amountInDollars = (amountInCent / 100).toFixed(2);
+//     toast.success(`$${amountInDollars} deposited into your account successfully`);
+//     setTimeout(() => {
+//       navigate('/wallet');
+//     }, 10000);
+//   }
+
+//   if (payment === 'failed') {
+//     toast.error('Payment Failed. Try Again.');
+//   }
+// }, [payment, navigate]);
+
+
+
+
 
   useEffect(()=>{
     dispatch(getUser())
@@ -181,8 +205,9 @@ const depositMoney = async (e)=>{
     console.log(`Deposit Amount: ${depositAmount}`);
   
     if(paymentMethod  === 'stripe'){
-axios.post(`${backendURL}/api/transaction/depositFundStripe`, {
-  amount:depositAmount 
+ axios.post(`${backendURL}/api/transaction/depositFundStripe`, {
+  amount:depositAmount
+
 }
 
 
@@ -625,6 +650,7 @@ sx={{
          <DepositModal
          depositData={depositData}
          closeModal={closeModal}
+
      depositAmount={depositAmount}
          handleDepositChange={handleDepositChange}
          depositMoney={depositMoney}

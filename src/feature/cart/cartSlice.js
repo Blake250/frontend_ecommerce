@@ -6,8 +6,8 @@ import cartService from '../../pages/cart/cartService';
 
 
 
-//const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
-const FRONTEND_URL = "https://shopito-app-zs1v.onrender.com"
+const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
+//const FRONTEND_URL = "https://shopito-app-zs1v.onrender.com"
 
 
 
@@ -240,13 +240,15 @@ const cartSlice = createSlice({
                     state.isLoading = false;
                     state.isSuccess = true;
                  localStorage.setItem('cartItems', JSON.stringify(action.payload))
-                 if(action.payload?.length > 0){
+                 if(action.payload && action.payload?.length  > 0){
                   window.location.href =   `${FRONTEND_URL}/cart`
                  }else{
-                  window.location.href =  FRONTEND_URL + "/"
+                  //window.location.href =  FRONTEND_URL + "/"
+                    window.location.href =  `${FRONTEND_URL}`
                  }
                    
                     console.log(action.payload)
+                    toast.error(action.payload)
                   })
                   .addCase(getCart.rejected, (state, action) => {
                     state.isLoading = false;

@@ -44,8 +44,6 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
   sx={{
     marginBottom:"1rem",
     
-      
-  
   }}
       
       >
@@ -54,9 +52,9 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
 
         <Card sx={{ 
          // width: grid ? '18rem' : '45%',
-         width: grid ? '18rem' : '50%',
+        width: grid ? '18rem' : '50%',
     
-         // height: '100%' ,
+        //  height: '100% !important' ,
           backgroundColor: '#fff',
           display: 'flex',
           flexDirection: grid ? 'column' : 'row',
@@ -66,8 +64,12 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
         
           '@media (max-width: 768px)': {
      
-            width: grid ? '50%' : '96%',
-            paddingRight:'30px'
+            width: grid ? '90%' : '96%',
+         
+          padding:'5px',
+           objectFit:'cover',
+           height:'100%',
+           paddingBottom:'7px'
           },
         }}>
           <Link to={`/product-details/${_id}`}>
@@ -78,19 +80,21 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
              
               sx={{
                 borderTop:'4px',
-                
                 width: '100%',
-                height: '100%',
+                maxHeight: '400px !important' ,
+              //  height: grid ? '90%' : '96%',
+               // height:'100%',
                 height: grid ? '30vh' : '100%', 
                 objectFit: 'cover',
                 cursor: 'pointer',
-                  
+                 
                 '@media (max-width: 768px)': {
                  width: '100%', 
-                
-               //  marginRight:'30px',
-               height: '100%',
-                 objectFit: 'cover!important',
+                 //height: '100% !important',
+                 height: grid ? '100px' : '100%',
+               // maxHeight: '120px !important',
+           //   height: '100px !important',
+               
                
                 },
               }}
@@ -99,8 +103,7 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
       
           <CardContent sx={{ 
           paddingLeft:'15px',
-          //paddingTop:'15px',
-      //   height:  '50vh' ,
+         
        
           
            marginTop:'2px',
@@ -151,6 +154,10 @@ const ProductItem = ({ product, price, quantity ,regularPrice, grid, _id , name}
                   fullWidth = {true}
                   sx={{ fontSize: '13px',
                        whiteSpace:'nowrap',
+
+                       '@media(max-width:768px)':{
+                        padding: '5px 20px',
+                       }
                 
                 }}
                 >

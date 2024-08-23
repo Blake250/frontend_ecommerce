@@ -29,6 +29,7 @@ const navigate = useNavigate()
     const publicKey = process.env.REACT_APP_FLW_PK 
    // const tx_ref = process.env.REACT_APP_TX_REF 
     const backendURL = `${process.env.REACT_APP_BACKEND_URL}/api/order/response`
+    //const backEndURL = `${process.env.REACT_APP_BACKEND_URL}/api/transaction/depositFundWithFlw`
     const tx_Ref = `blake_${uuidv4().toString}`;
 
     const saveOrder = async  ()=>{
@@ -96,7 +97,7 @@ const navigate = useNavigate()
             name: user.name,
           },
           customizations: {
-            title: "e-Shop online store",
+            title: "E-Shop online store",
             description: "Product's Payment",
             logo: "https://checkout.flutterwave.com/assets/img/rave-logo.png",
           },

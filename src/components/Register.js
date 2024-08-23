@@ -293,7 +293,7 @@ const userData = {name, email, password, }
 useEffect(()=>{
   if(isLoggedIn || isSuccess ){
 
-      navigate("/")
+      navigate("/login")
      dispatch(RESET_AUTH())
 
    

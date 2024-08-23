@@ -390,7 +390,7 @@ const logOutUser = (async()=>{
   return (
     <HeaderContainer>
       { isLoading &&   <Loader/>}
-      <HeaderContent /*className={scrollPage ? "fixed" : "" } */ >
+      <HeaderContent  /*className={scrollPage ? "fixed" : "" }*/ >
       {  isLoggedIn ?
        (
         
@@ -439,7 +439,7 @@ const logOutUser = (async()=>{
        
          <>  
        <ShowOnLogOut> 
-       <NavLinkStyled to="/" onClick={closeMenu}>
+       <NavLinkStyled to="/login" onClick={closeMenu}>
         
         <span>Login</span>
            
@@ -533,7 +533,7 @@ const logOutUser = (async()=>{
           </NavLinkStyled>
           </ShowOnLogOut>
           <ShowOnLogin>  
-          <NavLinkStyled to="/login" onClick={logOutUser}>
+          <NavLinkStyled  onClick={logOutUser}>
             <span>LogOut</span>
           </NavLinkStyled>
           </ShowOnLogin>

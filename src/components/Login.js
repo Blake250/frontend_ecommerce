@@ -318,6 +318,7 @@ const Login = () => {
 
     }
 
+<<<<<<< HEAD
 
   
  }, [dispatch, isLoggedIn, navigate, redirect]);
@@ -336,6 +337,15 @@ const Login = () => {
       dispatch(getCart());
     }
   }, [isLoggedIn, dispatch]);
+
+  
+=======
+  }, [dispatch, isLoggedIn, navigate, redirect]);
+>>>>>>> 746dc9e99d62a907926fccf42e5c7d67a3ff79d8
+
+
+
+
 
   
 

@@ -18,7 +18,7 @@ export function sendToVercelAnalytics(metric) {
     dsn: analyticsId,
     id: metric.id,
     page: window.location.pathname,
-    href: window.location.href,
+    href: ,
     event_name: metric.name,
     value: metric.value.toString(),
     speed: getConnectionSpeed(),

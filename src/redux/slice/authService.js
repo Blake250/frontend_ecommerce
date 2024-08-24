@@ -13,7 +13,7 @@ headers.append('Authorization', 'Basic ' );*/
 
 
 
- //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
+// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
 const BACKEND_URL = `${process.env}/https://api-shopito-cgp4.onrender.com`
 
   export const API_URL = `${BACKEND_URL}/api/user/`

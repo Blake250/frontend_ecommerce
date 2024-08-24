@@ -288,7 +288,7 @@ const Reset = () => {
           </form>
          
           <CreateOne>
-            <Link to="/login">-Login</Link>
+            <Link to="/">-Login</Link>
          
            
             <Link to="/register">-Register</Link>

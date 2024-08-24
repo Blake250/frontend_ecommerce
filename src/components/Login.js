@@ -302,11 +302,17 @@ const Login = () => {
   const redirect = urlParams.get('redirect') || ""
 
 
+
+
+ 
+  
+
+
   useEffect(() => {
-    if (isLoggedIn ) {
+    if (isLoggedIn  ) {
    //  navigate("/");
    if(redirect === 'cart'){
-    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage?.getItem('cartItems')) }));
     return  navigate("/cart");
   // return navigate('/login?redirect=cart');
 
@@ -318,10 +324,9 @@ const Login = () => {
 
     }
 
-<<<<<<< HEAD
 
   
- }, [dispatch, isLoggedIn, navigate, redirect]);
+ }, [dispatch, isLoggedIn,navigate, redirect]);
 
 
 
@@ -334,14 +339,11 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(getCart());
+     dispatch(getCart());
     }
-  }, [isLoggedIn, dispatch]);
+  }, [isLoggedIn, dispatch,]);
 
   
-=======
-  }, [dispatch, isLoggedIn, navigate, redirect]);
->>>>>>> 746dc9e99d62a907926fccf42e5c7d67a3ff79d8
 
 
 

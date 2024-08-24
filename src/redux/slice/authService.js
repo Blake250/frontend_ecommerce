@@ -116,7 +116,7 @@ const addToWishlist = (async(productData)=>{
    headers:{'Content-Type' : 'application/json'}
 
   })
-  console.log("API Response:", response.data); 
+ // console.log("API Response:", response.data); 
   return response.data
 
 })

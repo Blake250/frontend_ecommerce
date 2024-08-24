@@ -312,8 +312,8 @@ const Login = () => {
     if (isLoggedIn  ) {
    //  navigate("/");
    if(redirect === 'cart'){
-    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage?.getItem('cartItems')) }));
-    return  navigate("/cart");
+    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+     navigate("/cart");
   // return navigate('/login?redirect=cart');
 
    }

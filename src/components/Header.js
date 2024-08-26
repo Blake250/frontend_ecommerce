@@ -351,12 +351,12 @@ useEffect(() => {
 
 const logOutUser = (async()=>{
 
-  
+  navigate("/login") 
  await dispatch(logOut())
 
  await dispatch(RESET_AUTH()) 
 
-    navigate("/login") 
+   
 
  
 })

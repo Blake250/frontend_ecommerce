@@ -303,29 +303,41 @@ const Login = () => {
 
 
 
- 
-  
-
-
   useEffect(() => {
-    if (isLoggedIn  ) {
-   //  navigate("/");
-   if(redirect === 'cart'){
-    dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
-     navigate("/cart");
-  // return navigate('/login?redirect=cart');
-
-   }
+    console.log('isLoggedIn:', isLoggedIn); // Add this line
+    if (isLoggedIn) {
+      if (redirect === 'cart') {
+        dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+        navigate("/cart");
+      } else {
+        dispatch(getCart());
+        navigate("/");
+      }
+    }
+  }, [dispatch, isLoggedIn, navigate, redirect]);
+  
  
   
-    dispatch(getCart())
+
+
+//   useEffect(() => {
+//     if (isLoggedIn  ) {
+//    //  navigate("/");
+//    if(redirect === 'cart'){
+//     dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+//      navigate("/cart");
+//   // return navigate('/login?redirect=cart');
+
+//    }
+//     dispatch(getCart())
+//     navigate("/");
   
 
-    }
+//     }
 
 
   
- }, [dispatch, isLoggedIn,navigate, redirect]);
+//  }, [dispatch, isLoggedIn,navigate, redirect]);
 
 
 

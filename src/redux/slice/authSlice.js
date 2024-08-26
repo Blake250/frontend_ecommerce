@@ -398,8 +398,8 @@ const authSlice = createSlice({
                      // state.wishlist = action.payload.wishlist
                      state.wishlist = Array.isArray(action.payload.wishlist) ? action.payload.wishlist : []
 
-                      toast.success(action.payload)
-                    //  console.log(action.payload);
+                    //  toast.success(action.payload)
+                    console.log(action.payload);
                   
                       
                     })

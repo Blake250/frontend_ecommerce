@@ -291,9 +291,8 @@ text-align:center;
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  //const [isLoading, setIsLoading] = useState(false)
-  const {cartItems, isLoading, isLoggedIn, isSuccess, error }= useSelector((state)=> state?.auth)
-  //const { cartItems, cartTotalQuantity, cartTotalAmount, error } = useSelector((state) => state?.auth);
+  const { isLoading, isLoggedIn }= useSelector((state)=> state?.auth)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -345,12 +344,6 @@ const Login = () => {
 
   
 
-
-
-
-
-  
-
 const loginUser = ( async (e)=>{
 
   e.preventDefault()
@@ -371,13 +364,6 @@ await dispatch(login(userData))
 
 
 })
-
-
-
-
-
-
-
 
 
 

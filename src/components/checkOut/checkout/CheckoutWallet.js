@@ -34,7 +34,7 @@ const CheckoutWallet = () => {
   //const couponOrder = coupon !== null ? coupon: {name: 'nil'} 
   
   const productID = extractIdAndCartQuantity(cartItems)
-  console.log(`can you find the ${JSON.stringify(productID)}`)
+ // console.log(`can you find the ${JSON.stringify(productID)}`)
   
   
 
@@ -71,7 +71,7 @@ const CheckoutWallet = () => {
   if (response.data.url)
      {
     toast.success(response.data.message);
-  return  window.location.href = response.data.url;
+    window.location.href = response.data.url;
   }
   
   else {

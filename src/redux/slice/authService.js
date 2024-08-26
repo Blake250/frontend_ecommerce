@@ -3,17 +3,11 @@ import axios from "axios";
 
 
 
-/*
-let headers = new Headers();
-
-headers.append('Content-Type', 'application/json');
-headers.append('Accept', 'application/json');
-headers.append('GET', 'POST', 'OPTIONS');
-headers.append('Authorization', 'Basic ' );*/
 
 
 
-// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
+
+ //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
 const BACKEND_URL = `${process.env}/https://api-shopito-cgp4.onrender.com`
 
   export const API_URL = `${BACKEND_URL}/api/user/`

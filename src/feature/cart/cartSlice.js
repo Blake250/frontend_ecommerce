@@ -27,7 +27,7 @@ const initialState = {
 
 
 // create  A Category
-export const saveCartDB = createAsyncThunk("cart/saveCartDB", async (cartData, { rejectWithValue }) => {
+export const saveCartDB = createAsyncThunk("cart/DB", async (cartData, { rejectWithValue }) => {
   try {
     return await cartService.saveCartDB(cartData);
   } catch (error) {
@@ -269,44 +269,3 @@ const cartSlice = createSlice({
 
 
 
-
-  /*   
-  
-    ADD_TO_CART: (state, action)=>{
-        const cartQuantity = getCardQuantity(state.cartItems,action.payload._id)
-    
-        const productIndex = state.cartItems?.findIndex((item)=> item._id === action.payload._id )
-  
-      
-  
-    
-  
-        if(productIndex >= 0){
-         
-          if(cartQuantity === action.payload.quantity){
-              // a check to see if there  orderItem is available in the database
-              state.cartItems[productIndex].cartQuantity += 0
-              toast.info('Max number  of product reached!!!')
-          }
-          else {
-            state.cartItems[productIndex].cartQuantity += 1
-             toast.success(`${action.payload?.name} has been added to the cart`,{
-            position:'top-left'
-        })
-
-
-
-            const temProducts = {...action.payload, cartQuantity: 1}
-            state.cartItems?.push(temProducts)
-        
-            }
-             
-        }
-        
-        localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
-  
-     }
-  
-  
-  
-  */

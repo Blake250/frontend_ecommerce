@@ -244,7 +244,7 @@ const cartSlice = createSlice({
                   window.location.href =   `${FRONTEND_URL}/cart`
                  }else{
                   //window.location.href =  FRONTEND_URL + "/"
-                    window.location.href =  `${FRONTEND_URL}`
+                    window.location.href =  `${FRONTEND_URL}/`
                  }
                    
                     console.log(action.payload)

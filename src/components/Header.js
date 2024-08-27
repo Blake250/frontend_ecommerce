@@ -289,7 +289,7 @@ align-items:center;
     dispatch(CALCULATE_TOTAL_QUANTITY())
     },[dispatch, cartItems])
 
-  const userData = user?.name || "..."
+  const userData =  user?.name || "..."
 
 
 

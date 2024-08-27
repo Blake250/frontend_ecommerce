@@ -26,8 +26,8 @@ const initialState = {
 
 
 
-// create  A Category
-export const saveCartDB = createAsyncThunk("cart/DB", async (cartData, { rejectWithValue }) => {
+// save to cart
+export const saveCartDB = createAsyncThunk("cart/saveCartDB", async (cartData, { rejectWithValue }) => {
   try {
     return await cartService.saveCartDB(cartData);
   } catch (error) {
@@ -241,10 +241,10 @@ const cartSlice = createSlice({
                     state.isSuccess = true;
                  localStorage.setItem('cartItems', JSON.stringify(action.payload))
                  if(action.payload && action.payload.length  > 0){
-                  window.location.href =   `${FRONTEND_URL}/login/cart`
+                  window.location.href =   `${FRONTEND_URL}/cart`
                  }else{
                   //window.location.href =  FRONTEND_URL + "/"
-                    window.location.href =  `${FRONTEND_URL}/login/`
+                    window.location.href =  `${FRONTEND_URL}/`
                  }
                    
                     console.log(action.payload)

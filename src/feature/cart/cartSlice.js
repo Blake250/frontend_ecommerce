@@ -241,10 +241,10 @@ const cartSlice = createSlice({
                     state.isSuccess = true;
                  localStorage.setItem('cartItems', JSON.stringify(action.payload))
                  if(action.payload && action.payload.length  > 0){
-                  window.location.href =   `${FRONTEND_URL}/cart`
+                  window.location.href =   `${FRONTEND_URL}/login/cart`
                  }else{
                   //window.location.href =  FRONTEND_URL + "/"
-                    window.location.href =  `${FRONTEND_URL}`
+                    window.location.href =  `${FRONTEND_URL}/`
                  }
                    
                     console.log(action.payload)

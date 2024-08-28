@@ -239,7 +239,7 @@ const cartSlice = createSlice({
                    state.isError= false;
                     state.isLoading = false;
                     state.isSuccess = true;
-                 localStorage.setItem('cartItems', JSON.stringify(action.payload.user.cartItems))
+                 localStorage.setItem('cartItems', JSON.stringify(action.payload))
                  if(action.payload && action.payload.length  > 0){
                   window.location.href =   `${FRONTEND_URL}/cart`
                  }else{

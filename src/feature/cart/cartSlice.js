@@ -6,8 +6,8 @@ import cartService from '../../pages/cart/cartService';
 
 
 
-const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
-//const FRONTEND_URL = "https://api-shopito-app.vercel.app/"
+//const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
+const FRONTEND_URL = "https://api-shopito-app.vercel.app/"
 
 
 

@@ -7,7 +7,7 @@ import cartService from '../../pages/cart/cartService';
 
 
 const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
-//const FRONTEND_URL = "https://shopito-app-zs1v.onrender.com"
+//const FRONTEND_URL = "https://api-shopito-app.vercel.app/"
 
 
 
@@ -244,7 +244,7 @@ const cartSlice = createSlice({
                   window.location.href =   `${FRONTEND_URL}/cart`
                  }else{
                   //window.location.href =  FRONTEND_URL + "/"
-                    window.location.href =  `${FRONTEND_URL}/`
+                    window.location.href =  `${FRONTEND_URL}`
                  }
                    
                     console.log(action.payload)

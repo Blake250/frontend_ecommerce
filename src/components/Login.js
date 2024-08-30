@@ -304,7 +304,7 @@ const Login = () => {
 
 
   useEffect(() => {
-    console.log('isLoggedIn:', isLoggedIn); // Add this line
+    console.log('isLoggedIn:', isLoggedIn); 
     if (isLoggedIn) {
       if (redirect === 'cart') {
         dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));

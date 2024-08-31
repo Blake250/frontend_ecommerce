@@ -96,7 +96,7 @@ function App() {
             <Route path="/order-details/:id" element={<OrderDetails />} />
             {/* Private Routes */}
         
-              <Route path="/" element={<Home />} />
+              <Route path="/" exact element={<Home />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/order" element={<OrderPage />} />
               <Route path="/profile" element={<Profile />} />

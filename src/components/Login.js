@@ -303,15 +303,29 @@ const Login = () => {
 
 
 
+  // useEffect(() => {
+  //   console.log('isLoggedIn:', isLoggedIn); 
+  //   if (isLoggedIn) {
+  //     if (redirect === 'cart') {
+  //       dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+  //       navigate("/cart");
+  //     } else {
+  //       dispatch(getCart());
+  //       navigate("/");
+  //     }
+  //   }
+  // }, [dispatch, isLoggedIn, navigate, redirect]);
+
+
   useEffect(() => {
-    console.log('isLoggedIn:', isLoggedIn); 
     if (isLoggedIn) {
       if (redirect === 'cart') {
         dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
         navigate("/cart");
       } else {
-        dispatch(getCart());
-        navigate("/");
+        dispatch(getCart()).then(() => {
+          navigate("/");
+        });
       }
     }
   }, [dispatch, isLoggedIn, navigate, redirect]);

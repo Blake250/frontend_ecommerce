@@ -303,55 +303,38 @@ const Login = () => {
 
 
 
-  // useEffect(() => {
-  //   console.log('isLoggedIn:', isLoggedIn); 
-  //   if (isLoggedIn) {
-  //     if (redirect === 'cart') {
-  //       dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
-  //       navigate("/cart");
-  //     } else {
-  //       dispatch(getCart());
-  //       navigate("/");
-  //     }
-  //   }
-  // }, [dispatch, isLoggedIn, navigate, redirect]);
-
-
   useEffect(() => {
+    console.log('isLoggedIn:', isLoggedIn); 
     if (isLoggedIn) {
       if (redirect === 'cart') {
         dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
         navigate("/cart");
       } else {
-        dispatch(getCart()).then(() => {
-          navigate("/");
-        });
+        dispatch(getCart());
+        navigate("/");
       }
     }
   }, [dispatch, isLoggedIn, navigate, redirect]);
+
+
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     if (redirect === 'cart') {
+  //       dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
+  //       navigate("/cart");
+  //     } else {
+  //       dispatch(getCart()).then(() => {
+  //         navigate("/");
+  //       });
+  //     }
+  //   }
+  // }, [dispatch, isLoggedIn, navigate, redirect]);
   
  
   
 
 
-//   useEffect(() => {
-//     if (isLoggedIn  ) {
-//    //  navigate("/");
-//    if(redirect === 'cart'){
-//     dispatch(saveCartDB({ cartItems: JSON.parse(localStorage.getItem('cartItems')) }));
-//      navigate("/cart");
-//   // return navigate('/login?redirect=cart');
 
-//    }
-//     dispatch(getCart())
-//     navigate("/");
-  
-
-//     }
-
-
-  
-//  }, [dispatch, isLoggedIn,navigate, redirect]);
 
 
 

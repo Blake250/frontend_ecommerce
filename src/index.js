@@ -10,9 +10,12 @@ import store from "./store"
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
-//store.dispatch(authSlice())
-
+// Disable React DevTools only in production
+if (process.env.NODE_ENV === 'production') {
+  disableReactDevTools();
+}
 
 
 
@@ -23,10 +26,7 @@ const root = createRoot(container);
 let persistor = persistStore(store)
 
 
-//store.dispatch(productFetch())
-
-
-
+//store.dispatch(productFetch()
 
 
 root.render(

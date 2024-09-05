@@ -12,10 +12,10 @@ import { persistStore } from 'redux-persist';
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
-// Disable React DevTools only in production
-if (process.env.NODE_ENV === 'production') {
-  disableReactDevTools();
-}
+// // Disable React DevTools only in production
+// if (process.env.NODE_ENV === 'production') {
+//   disableReactDevTools();
+// }
 
 
 

@@ -75,8 +75,8 @@ const persistConfig = {
         }),
        
     
-     //devTools:process.env.NODE_ENV !== "production"
-    devTools : false
+   devTools:process.env.NODE_ENV !== "production"
+  // devTools : false
     
     })
     

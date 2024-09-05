@@ -73,7 +73,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
+    <Router  >
       <AppContainer>
         <HeaderContainer>
           <ToastContainer />
@@ -83,7 +83,7 @@ function App() {
           <Routes>
             {/* Public Routes */}
            
-            {<Route path="/login" element={<Login />} />}
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset" element={<Reset />} />
             <Route path="/page" element={<PageMenu />} />
@@ -96,8 +96,9 @@ function App() {
             <Route path="/order-details/:id" element={<OrderDetails />} />
             {/* Private Routes */}
         
-              <Route path="/" exact element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
+              
+             <Route path="/" exact element={<Home />} /> 
+             <Route path="/contact" element={<Contact />} />
               <Route path="/order" element={<OrderPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/shop" element={<Product />} />
@@ -119,7 +120,7 @@ function App() {
                 } />
               
 
-            <Route path="/*" element={<ErrorPage />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </MainContent>
         <FooterContainer>

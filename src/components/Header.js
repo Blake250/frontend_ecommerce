@@ -349,7 +349,7 @@ useEffect(() => {
 
   
 
-const logOutUser = (async()=>{
+const logOutUser = async()=>{
 
  
  await dispatch(logOut())
@@ -359,7 +359,7 @@ const logOutUser = (async()=>{
  navigate("/login")
 
  
-})
+}
 
 
 

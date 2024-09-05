@@ -291,7 +291,7 @@ text-align:center;
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { isLoading, isLoggedIn }= useSelector((state)=> state?.auth)
+  const { isLoading, isLoggedIn, isSuccess }= useSelector((state)=> state?.auth)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -335,21 +335,11 @@ const Login = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn &&  isSuccess) {
      dispatch(getCart());
     }
-  }, [isLoggedIn, dispatch,]);
+  }, [isLoggedIn,isSuccess, dispatch,]);
 
   
 
